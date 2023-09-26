@@ -6,7 +6,7 @@ import { getFirestore } from "firebase/firestore";
 import { env } from "~/env.mjs";
 
 const firebaseConfig = {
-  apiKey: env.NEXT_PUBLIC_TMDB_FIREBASE_API,
+  apiKey: env.NEXT_PUBLIC_FIREBASE_API,
   authDomain: "the-cinephile-house-cm.firebaseapp.com",
   projectId: "the-cinephile-house-cm",
   storageBucket: "the-cinephile-house-cm.appspot.com",
