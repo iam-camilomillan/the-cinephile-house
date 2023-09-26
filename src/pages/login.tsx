@@ -28,6 +28,9 @@ const Login = () => {
   /* Utils states */
   const [isLoading, setIsLoading] = useState(true);
 
+  /* Handles the forgot password */
+  const handleForgot = async () => {};
+
   /* Handles the form submit */
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -96,7 +99,11 @@ const Login = () => {
           <div className="flex w-full justify-between">
             <label className="font-medium">Password</label>
 
-            <button className="text-white/80 transition-colors duration-200 ease-in-out hover:text-white">
+            <button
+              type="button"
+              onClick={handleForgot}
+              className="text-white/80 transition-colors duration-200 ease-in-out hover:text-white"
+            >
               Forgot?
             </button>
           </div>
