@@ -19,18 +19,18 @@ export default function Home() {
   const [randomMovie, setRandomMovie] = useState<Movie | null>(null);
 
   /* Data fetching */
-  const popularMovies = api.tmbd.fetchTMDB.useQuery({
+  const moviesRequest = api.tmbd.fetchTMDB.useQuery({
     categorie: "movie",
     header: "popular",
   });
 
   useEffect(() => {
     /* Sets a random movie to show in hero when the popular movier are fetched */
-    if (popularMovies.data?.results) {
+    if (moviesRequest.data?.results) {
       const randomIndex = getRandonNumber(0, 20);
-      setRandomMovie(popularMovies.data.results[randomIndex]);
+      setRandomMovie(moviesRequest.data.results[randomIndex]);
     }
-  }, [popularMovies.data]);
+  }, [moviesRequest.data]);
 
   return (
     <>
