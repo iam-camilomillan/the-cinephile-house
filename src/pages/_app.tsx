@@ -6,7 +6,7 @@ import { AuthContextProvider } from "~/context/AuthContext";
 import { DataContextProvider } from "~/context/DataContext";
 
 /* Components imports */
-import Navbar from "~/sections/Navbar";
+import Navbar from "~/sections/navbar";
 import MessageCard from "~/components/MessageCard";
 import Footer from "~/sections/footer";
 

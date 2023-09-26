@@ -1,15 +1,15 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { MouseEventHandler, useState } from "react";
-
-/* Icons imports */
-import { FaBars, FaFilm } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
 
 /* Context imports */
 import { useAuth } from "~/context/AuthContext";
 import useOutsideClick from "~/hooks/useOutsideClick";
+
+/* Icons imports */
+import { FaBars, FaFilm } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 
 const Navbar = () => {
   /* Context */
@@ -101,7 +101,12 @@ const Navbar = () => {
 
           {/* Auth buttons */}
           {user ? (
-            <div>
+            <div className="flex items-center gap-x-4">
+              {/* Profile */}
+              <Link href="/profile" className="px-2 py-1 text-xl">
+                Profile
+              </Link>
+
               {/* Log out */}
               <button
                 onClick={async () => {
@@ -151,26 +156,17 @@ const Navbar = () => {
         {/* Navigation links */}
         <nav className="flex gap-x-4">
           {/* Movies page link */}
-          <Link
-            href="/movies"
-            className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-red-600 after:duration-200 hover:after:w-full"
-          >
+          <Link href="/movies" className="custom-underline">
             Movies
           </Link>
 
           {/* TV Shows page link */}
-          <Link
-            href="/tv-shows"
-            className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-red-600 after:duration-200 hover:after:w-full"
-          >
+          <Link href="/tv-shows" className="custom-underline">
             TV Shows
           </Link>
 
           {/* Top rated page link */}
-          <Link
-            href="/top-rated"
-            className="relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-red-600 after:duration-200 hover:after:w-full"
-          >
+          <Link href="/top-rated" className="custom-underline">
             Top Rated
           </Link>
         </nav>
