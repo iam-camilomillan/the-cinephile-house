@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 
 /* Sections imports */
-import Hero from "~/sections/Home/home-hero";
-import Content from "~/sections/Home/home-content";
+import Hero from "~/sections/home-hero";
+import Content from "~/sections/home-content";
 
 /* Components imports */
 import LoadingScreen from "~/components/loading-screen";

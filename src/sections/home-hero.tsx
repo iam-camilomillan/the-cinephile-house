@@ -4,24 +4,27 @@ import Link from "next/link";
 
 /* Components imports */
 import RateButton from "~/components/RateButton";
-import AddToButtons from "~/components/AddToButtons";
+import AddToButtons from "~/components/add-to-buttons";
+
+/* React spinners imports */
+import { ClipLoader } from "react-spinners";
 
 /* Icons imports */
 import { FaPlayCircle } from "react-icons/fa";
 
-/* Loader import */
-import { ClipLoader } from "react-spinners";
+/* Utils imports */
+import { api } from "~/utils/api";
 
 /* Types imports */
 import type { Movie } from "types";
-import { api } from "~/utils/api";
 
-const Hero = ({ movie }: { movie: Movie }) => {
+const HomeHero = ({ movie }: { movie: Movie }) => {
   const [trailer, setTrailer] = useState<any>(null);
 
   /* Utils */
   const [isLoading, setIsLoading] = useState(true);
 
+  /* Data fetching */
   const videosRequest = api.tmbd.videos.useQuery({
     categorie: "movie",
     id: movie.id,
@@ -125,4 +128,4 @@ const Hero = ({ movie }: { movie: Movie }) => {
   ) : null;
 };
 
-export default Hero;
+export default HomeHero;

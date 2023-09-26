@@ -1,13 +1,13 @@
-/* Component imports */
-import ContentModule from "~/components/ContentModule";
+/* Components imports */
+import SliderModule from "~/components/slider-module";
 
-const Content = () => {
+const HomeContent = () => {
   return (
     <section className="px-8">
       {/* Content block */}
       <div className="mx-auto max-w-7xl">
         {/* Popular movies and shows */}
-        <ContentModule
+        <SliderModule
           title="Trending"
           categories={["movie", "tv"]}
           headers={["popular"]}
@@ -17,7 +17,7 @@ const Content = () => {
         <div className="h-4" />
 
         {/* Shows on air */}
-        <ContentModule
+        <SliderModule
           title="Shows on air"
           categories={["tv"]}
           headers={["on_the_air"]}
@@ -27,7 +27,7 @@ const Content = () => {
         <div className="h-4" />
 
         {/* Top rated movies and shows */}
-        <ContentModule
+        <SliderModule
           title="Top rated"
           categories={["movie", "tv"]}
           headers={["top_rated"]}
@@ -37,7 +37,7 @@ const Content = () => {
         <div className="h-4" />
 
         {/* Movies on theatres */}
-        <ContentModule
+        <SliderModule
           title="On theatres"
           categories={["movie"]}
           headers={["now_playing"]}
@@ -47,7 +47,7 @@ const Content = () => {
         <div className="h-4" />
 
         {/* Coming soon movies */}
-        <ContentModule
+        <SliderModule
           title="Coming soon"
           categories={["movie"]}
           headers={["upcoming"]}
@@ -58,4 +58,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default HomeContent;
