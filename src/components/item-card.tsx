@@ -42,6 +42,7 @@ const ItemCard = ({ data }: any) => {
           width={700}
           height={400}
           onLoadingComplete={() => setIsLoading(false)}
+          quality={16}
         />
         {isLoading ? (
           <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-white">

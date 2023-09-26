@@ -9,7 +9,7 @@ const Footer = () => {
         <a
           href="https://iamcamilomillan.vercel.app/"
           target="_blank"
-          className="font-medium opacity-80 transition-colors duration-200 ease-in-out hover:text-red-600"
+          className="custom-underline font-medium opacity-80 duration-200 ease-in-out hover:opacity-100"
         >
           Camilo Millan
         </a>{" "}
@@ -17,7 +17,7 @@ const Footer = () => {
         <a
           href="https://github.com/iam-camilomillan/the-cinephile-house"
           target="_blank"
-          className="font-medium opacity-80 transition-colors duration-200 ease-in-out hover:text-red-600"
+          className="custom-underline font-medium opacity-80 duration-200 ease-in-out hover:opacity-100"
         >
           Project repository
         </a>
