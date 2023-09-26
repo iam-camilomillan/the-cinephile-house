@@ -1,29 +1,29 @@
 export type Movie = {
   adult: boolean;
-  backdropPath: string;
-  belongsToCollection: null;
+  backdrop_path: string;
+  belongs_to_collection: null;
   budget: number;
   genres: Genre[];
   homepage: string;
   id: number;
-  imdbID: string;
-  originalLanguage: string;
-  originalTitle: string;
+  imdb_id: string;
+  original_language: string;
+  original_title: string;
   overview: string;
   popularity: number;
-  posterPath: string;
-  productionCompanies: ProductionCompany[];
-  productionCountries: ProductionCountry[];
-  releaseDate: Date;
+  poster_path: string;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  release_date: Date;
   revenue: number;
   runtime: number;
-  spokenLanguages: SpokenLanguage[];
+  spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
   title: string;
   video: boolean;
-  voteAverage: number;
-  voteCount: number;
+  vote_average: number;
+  vote_count: number;
 };
 
 export type Genre = {
@@ -33,63 +33,63 @@ export type Genre = {
 
 export type ProductionCompany = {
   id: number;
-  logoPath: string;
+  logo_path: string;
   name: string;
-  originCountry: string;
+  origin_country: string;
 };
 
 export type ProductionCountry = {
-  iso3166_1: string;
+  iso_3166_1: string;
   name: string;
 };
 
 export type SpokenLanguage = {
-  englishName: string;
-  iso639_1: string;
+  english_name: string;
+  iso_639_1: string;
   name: string;
 };
 
-export type TVShow = {
+export type TVShows = {
   adult: boolean;
-  backdropPath: string;
-  createdBy: CreatedBy[];
-  episodeRunTime: number[];
-  firstAirDate: Date;
+  backdrop_path: string;
+  created_by: CreatedBy[];
+  episode_run_time: number[];
+  first_air_date: Date;
   genres: Genre[];
   homepage: string;
   id: number;
-  inProduction: boolean;
+  in_production: boolean;
   languages: string[];
-  lastAirDate: Date;
-  lastEpisodeToAir: LastEpisodeToAir;
+  last_air_date: Date;
+  last_episode_to_air: LastEpisodeToAir;
   name: string;
-  nextEpisodeToAir: null;
+  next_episode_to_air: null;
   networks: Network[];
-  numberOfEpisodes: number;
-  numberOfSeasons: number;
-  originCountry: string[];
-  originalLanguage: string;
-  originalName: string;
+  number_of_episodes: number;
+  number_of_seasons: number;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
   overview: string;
   popularity: number;
-  posterPath: string;
-  productionCompanies: Network[];
-  productionCountries: ProductionCountry[];
+  poster_path: string;
+  production_companies: Network[];
+  production_countries: ProductionCountry[];
   seasons: Season[];
-  spokenLanguages: SpokenLanguage[];
+  spoken_languages: SpokenLanguage[];
   status: string;
   tagline: string;
   type: string;
-  voteAverage: number;
-  voteCount: number;
+  vote_average: number;
+  vote_count: number;
 };
 
 export type CreatedBy = {
   id: number;
-  creditID: string;
+  credit_id: string;
   name: string;
   gender: number;
-  profilePath: string;
+  profile_path: string;
 };
 
 export type Genre = {
@@ -101,43 +101,43 @@ export type LastEpisodeToAir = {
   id: number;
   name: string;
   overview: string;
-  voteAverage: number;
-  voteCount: number;
-  airDate: Date;
-  episodeNumber: number;
-  episodeType: string;
-  productionCode: string;
+  vote_average: number;
+  vote_count: number;
+  air_date: Date;
+  episode_number: number;
+  episode_type: string;
+  production_code: string;
   runtime: number;
-  seasonNumber: number;
-  showID: number;
-  stillPath: string;
+  season_number: number;
+  show_id: number;
+  still_path: string;
 };
 
 export type Network = {
   id: number;
-  logoPath: string;
+  logo_path: string;
   name: string;
-  originCountry: string;
+  origin_country: string;
 };
 
 export type ProductionCountry = {
-  iso3166_1: string;
+  iso_3166_1: string;
   name: string;
 };
 
 export type Season = {
-  airDate: Date | null;
-  episodeCount: number;
+  air_date: Date | null;
+  episode_count: number;
   id: number;
   name: string;
   overview: string;
-  posterPath: string;
-  seasonNumber: number;
-  voteAverage: number;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
 };
 
 export type SpokenLanguage = {
-  englishName: string;
-  iso639_1: string;
+  english_name: string;
+  iso_639_1: string;
   name: string;
 };
