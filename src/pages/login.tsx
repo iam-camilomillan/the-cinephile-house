@@ -2,14 +2,14 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+/* Context imports */
+import { useAuth } from "~/context/AuthContext";
+
 /* Icons imports */
 import { FaGoogle } from "react-icons/fa";
 
-/* Loading screen import */
-import LoadingScreen from "~/components/LoadingScreen";
-
-/* Context imports */
-import { useAuth } from "~/context/AuthContext";
+/* Loading screen imports */
+import LoadingScreen from "~/components/loading-screen";
 
 /* Router */
 import { useRouter } from "next/router";
