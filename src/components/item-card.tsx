@@ -3,12 +3,12 @@ import Image from "next/image";
 import Link from "next/link";
 
 /* Component imports */
-import AddToButtons from "../AddToButtons";
+import AddToButtons from "~/components/add-to-buttons";
 
 /* Util imports */
 import { ClipLoader } from "react-spinners";
 
-const MovieCard = ({ data }: any) => {
+const ItemCard = ({ data }: any) => {
   const [isHovering, setIsHovering] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,7 +34,7 @@ const MovieCard = ({ data }: any) => {
       {/* Image and image loader */}
       <Link
         href={`/movies/${data.id}`}
-        className="relative h-60 overflow-hidden rounded-md"
+        className="relative h-60 overflow-hidden rounded-md border border-black/25"
       >
         <Image
           src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
@@ -43,9 +43,8 @@ const MovieCard = ({ data }: any) => {
           height={400}
           onLoadingComplete={() => setIsLoading(false)}
         />
-
         {isLoading ? (
-          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-black/75">
+          <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-white">
             <ClipLoader
               color="rgba(220, 38 ,38, 1)"
               loading={true}
@@ -55,6 +54,7 @@ const MovieCard = ({ data }: any) => {
             />
           </div>
         ) : null}
+        |
       </Link>
 
       <div className="h-2" />
@@ -75,4 +75,4 @@ const MovieCard = ({ data }: any) => {
   );
 };
 
-export default MovieCard;
+export default ItemCard;
