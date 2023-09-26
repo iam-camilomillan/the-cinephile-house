@@ -8,7 +8,7 @@ import { DataContextProvider } from "~/context/DataContext";
 /* Components imports */
 import Navbar from "~/sections/Navbar";
 import MessageCard from "~/components/MessageCard";
-import Footer from "~/sections/Footer";
+import Footer from "~/sections/footer";
 
 // Font imports
 import { Inter } from "next/font/google";
