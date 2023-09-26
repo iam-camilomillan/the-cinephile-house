@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-/* Component imports */
+/* Components imports */
 import AddToButtons from "~/components/add-to-buttons";
 
-/* Util imports */
+/* React spinners imports */
 import { ClipLoader } from "react-spinners";
 
 const ItemCard = ({ data }: any) => {
