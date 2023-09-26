@@ -9,9 +9,16 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 /* React spinners imports */
 import { ClipLoader } from "react-spinners";
 
-const data: any = null;
+/* Types imports */
+import { Movie, TVShow } from "types";
 
-const Slider = ({ sliderId }: any) => {
+const Slider = ({
+  data,
+  sliderId,
+}: {
+  data: Movie[] | TVShow[] | null;
+  sliderId: string;
+}) => {
   const [showControls, setShowControls] = useState(false);
 
   /* Scrolls the slider to the left */
