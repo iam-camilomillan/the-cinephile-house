@@ -2,13 +2,13 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 
 /* Sections imports */
-import Hero from "~/sections/Home/Hero";
-import Content from "~/sections/Home/Content";
+import Hero from "~/sections/Home/home-hero";
+import Content from "~/sections/Home/home-content";
 
 /* Components imports */
-import LoadingScreen from "~/components/LoadingScreen";
+import LoadingScreen from "~/components/loading-screen";
 
-// Utils
+/* Utils */
 import getRandonNumber from "~/utils/getRandomNumber";
 import { api } from "~/utils/api";
 
