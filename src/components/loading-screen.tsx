@@ -1,7 +1,7 @@
-/* React spinners import */
+/* React spinners imports */
 import { PuffLoader } from "react-spinners";
 
-/* Icon imports */
+/* Icons imports */
 import { FaFilm } from "react-icons/fa";
 
 const LoadingScreen = () => {
