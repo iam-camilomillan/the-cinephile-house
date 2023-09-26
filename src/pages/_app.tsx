@@ -5,7 +5,7 @@ import "~/styles/globals.css";
 import { AuthContextProvider } from "~/context/AuthContext";
 import { DataContextProvider } from "~/context/DataContext";
 
-/* Component imports */
+/* Components imports */
 import Navbar from "~/sections/Navbar";
 import MessageCard from "~/components/MessageCard";
 import Footer from "~/sections/Footer";
