@@ -8,6 +8,7 @@ export const env = createEnv({
    */
   server: {
     NODE_ENV: z.enum(["development", "test", "production"]),
+    TMDB_API_KEY: z.string().min(1),
   },
 
   /**
@@ -16,7 +17,6 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_TMDB_API_KEY: z.string().min(1),
     NEXT_PUBLIC_FIREBASE_API: z.string().min(1),
   },
 
@@ -26,7 +26,7 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
-    NEXT_PUBLIC_TMDB_API_KEY: process.env.NEXT_PUBLIC_TMDB_API_KEY,
+    TMDB_API_KEY: process.env.TMDB_API_KEY,
     NEXT_PUBLIC_FIREBASE_API: process.env.NEXT_PUBLIC_FIREBASE_API,
   },
   /**

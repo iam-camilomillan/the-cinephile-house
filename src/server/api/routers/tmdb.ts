@@ -11,7 +11,7 @@ export const tmdbRouter = createTRPCRouter({
     .input(z.object({ categorie: z.string(), header: z.string() }))
     .query(async ({ input }) => {
       const movies = await fetch(
-        `${baseUrl}/${input.categorie}/${input.header}?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`,
+        `${baseUrl}/${input.categorie}/${input.header}?api_key=${env.TMDB_API_KEY}&language=en-US&page=1`,
       );
 
       return movies.json();
@@ -22,7 +22,7 @@ export const tmdbRouter = createTRPCRouter({
     .input(z.object({ categorie: z.string(), id: z.number() }))
     .query(async ({ input }) => {
       const movies = await fetch(
-        `${baseUrl}/${input.categorie}/${input.id}/videos?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}&language=en-US&page=1`,
+        `${baseUrl}/${input.categorie}/${input.id}/videos?api_key=${env.TMDB_API_KEY}&language=en-US&page=1`,
       );
 
       return movies.json();
@@ -33,7 +33,7 @@ export const tmdbRouter = createTRPCRouter({
     .input(z.object({ categorie: z.string(), id: z.number() }))
     .query(async ({ input }) => {
       const movies = await fetch(
-        `${baseUrl}/${input.categorie}/${input.id}/watch/providers?api_key=${env.NEXT_PUBLIC_TMDB_API_KEY}`,
+        `${baseUrl}/${input.categorie}/${input.id}/watch/providers?api_key=${env.TMDB_API_KEY}`,
       );
 
       return movies.json();
