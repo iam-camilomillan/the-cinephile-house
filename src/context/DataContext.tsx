@@ -28,8 +28,6 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
 
   const getUserData = async (userId: string) => {
     try {
-      setDataMessage("Loading...");
-
       const documentReference = doc(firebaseFirestore, `users/${userId}`);
 
       const documentData = await getDoc(documentReference);

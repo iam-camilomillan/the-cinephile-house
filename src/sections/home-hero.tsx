@@ -72,7 +72,9 @@ const HomeHero = ({ movie }: { movie: Movie }) => {
           {/* Left container */}
           <div className="flex h-full max-w-sm flex-col justify-center">
             {/* Movie title */}
-            <h1 className="text-5xl font-bold">{movie.title}</h1>
+            <Link href={`/movies/${movie.id}`} className="text-5xl font-bold">
+              {movie.title}
+            </Link>
 
             {/* Separator */}
             <div className="h-4" />

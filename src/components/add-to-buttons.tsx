@@ -1,3 +1,7 @@
+/* Context imports */
+import { useAuth } from "~/context/AuthContext";
+import { useData } from "~/context/DataContext";
+
 /* Icons imports */
 import { useEffect, useState } from "react";
 import {
@@ -8,10 +12,6 @@ import {
   FaRegClock,
   FaRegHeart,
 } from "react-icons/fa";
-
-/* Context imports */
-import { useAuth } from "~/context/AuthContext";
-import { useData } from "~/context/DataContext";
 
 const AddToButtons = ({ id }: { id: number }) => {
   /* Context */
