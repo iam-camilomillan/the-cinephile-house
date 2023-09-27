@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "~/context/AuthContext";
 
+/* Context imports */
 import { useData } from "~/context/DataContext";
 
 const MessageCard = () => {
@@ -26,7 +27,7 @@ const MessageCard = () => {
 
   return (
     <div
-      className={`fixed -top-16 left-1/2 z-50 -translate-x-1/2 ${
+      className={`fixed -top-16 left-1/2 z-50 flex -translate-x-1/2 items-center justify-center ${
         showCard ? "translate-y-20" : null
       } rounded-md border border-white bg-black px-4 py-2 text-center text-white transition-transform duration-200 ease-in-out`}
     >

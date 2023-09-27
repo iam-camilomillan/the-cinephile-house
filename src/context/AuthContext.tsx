@@ -56,9 +56,11 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
   const signUpWithEmail = async (
     email: string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
   ) => {
     try {
+      setAuthMessage("Loading...");
+
       if (email.length < 6) {
         throw new Error("Email should be at least 6 characters long.");
       }
@@ -96,6 +98,8 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
           },
         },
       });
+
+      setAuthMessage("Signed in.");
     } catch (error) {
       if (error instanceof Error) {
         setAuthMessage(error.message);
@@ -113,7 +117,9 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
   const logInWithEmail = async (email: string, password: string) => {
     try {
+      setAuthMessage("Loading...");
       await signInWithEmailAndPassword(firebaseAuth, email, password);
+      setAuthMessage("Logged in.");
     } catch (error) {
       if (error instanceof Error) {
         setAuthMessage(error.message);
@@ -127,8 +133,10 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
   const logInWithGoogle = async () => {
     try {
+      setAuthMessage("Loading...");
       const authProvider = new GoogleAuthProvider();
       await signInWithPopup(firebaseAuth, authProvider);
+      setAuthMessage("Logged in.");
     } catch (error) {
       if (error instanceof Error) {
         setAuthMessage(error.message);
@@ -142,7 +150,9 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
 
   const logOut = async () => {
     try {
+      setAuthMessage("Loading...");
       await signOut(firebaseAuth);
+      setAuthMessage("Logged out.");
     } catch (error) {
       if (error instanceof Error) {
         setAuthMessage(error.message);
@@ -170,7 +180,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
         if (user) {
           const documentReference = doc(
             firebaseFirestore,
-            `users/${user.email}`
+            `users/${user.email}`,
           );
           const documentSnapshot = await getDoc(documentReference);
 
@@ -203,7 +213,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps) => {
             }
           }
         }
-      }
+      },
     );
     return unsubscribe;
   }, []);

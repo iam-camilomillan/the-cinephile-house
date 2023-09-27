@@ -28,6 +28,8 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
 
   const getUserData = async (userId: string) => {
     try {
+      setDataMessage("Loading...");
+
       const documentReference = doc(firebaseFirestore, `users/${userId}`);
 
       const documentData = await getDoc(documentReference);
@@ -47,6 +49,8 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
 
   const addRating = async (userId: string, movieId: string, rating: number) => {
     try {
+      setDataMessage("Loading...");
+
       if (!userId) {
         throw new Error("You need to log in first.");
       }
@@ -62,7 +66,7 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
             },
           },
         },
-        { merge: true }
+        { merge: true },
       );
 
       setDataMessage("Item rated successfully.");
@@ -79,6 +83,8 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
 
   const addItemTo = async (userId: string, listId: string, movieId: string) => {
     try {
+      setDataMessage("Loading...");
+
       if (!userId) {
         throw new Error("You need to log in first.");
       }
@@ -115,7 +121,7 @@ export const DataContextProvider = ({ children }: DataProviderProps) => {
             },
             lists: updatedList,
           },
-          { merge: true }
+          { merge: true },
         );
       }
 

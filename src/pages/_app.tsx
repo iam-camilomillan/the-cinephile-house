@@ -7,7 +7,7 @@ import { DataContextProvider } from "~/context/DataContext";
 
 /* Components imports */
 import Navbar from "~/sections/navbar";
-import MessageCard from "~/components/MessageCard";
+import MessageCard from "~/components/message-card";
 import Footer from "~/sections/footer";
 
 // Font imports
