@@ -18,7 +18,7 @@ const LoadingScreen = () => {
       />
 
       {/* Icon */}
-      <FaFilm className="absolute -rotate-45 text-4xl text-red-600" />
+      <FaFilm className="text-clr-one absolute -rotate-45 text-4xl" />
     </div>
   );
 };

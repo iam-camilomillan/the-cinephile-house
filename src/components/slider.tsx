@@ -42,9 +42,9 @@ const Slider = ({
       {/* Slide to left button */}
       <button
         onClick={slideToLeft}
-        className={`absolute bottom-1/2 left-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-red-600 text-lg text-white ${
+        className={`absolute bottom-1/2 left-0 z-10 flex h-8 w-8 -translate-x-1/2 items-center justify-center rounded-full bg-clr-one text-lg text-white ${
           showControls ? "opacity-100" : "opacity-0"
-        } transition duration-200 ease-in-out hover:bg-red-500`}
+        } transition duration-200 ease-in-out hover:bg-clr-one/90`}
       >
         <FaChevronLeft />
       </button>
@@ -52,9 +52,9 @@ const Slider = ({
       {/* Slide to right button */}
       <button
         onClick={slideToRight}
-        className={`absolute bottom-1/2 right-0 z-10 flex h-8 w-8 translate-x-1/2 items-center justify-center rounded-full bg-red-600 text-lg text-white ${
+        className={`absolute bottom-1/2 right-0 z-10 flex h-8 w-8 translate-x-1/2 items-center justify-center rounded-full bg-clr-one text-lg text-white ${
           showControls ? "opacity-100" : "opacity-0"
-        } transition duration-200 ease-in-out hover:bg-red-500`}
+        } transition duration-200 ease-in-out hover:bg-clr-one/90`}
       >
         <FaChevronRight />
       </button>

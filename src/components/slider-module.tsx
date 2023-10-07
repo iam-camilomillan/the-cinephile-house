@@ -57,7 +57,7 @@ const SliderModule = ({
         <div className="w-4" />
 
         {options.length != 1 ? (
-          <div className="relative flex items-center gap-4 overflow-hidden rounded-full border border-red-600 px-2 py-1">
+          <div className="border-clr-one relative flex items-center gap-4 overflow-hidden rounded-full border px-2 py-1">
             {/* First option */}
             <button
               onClick={() => {
@@ -86,7 +86,7 @@ const SliderModule = ({
             <div
               className={`absolute left-0 top-0 -z-10 h-full w-1/2 ${
                 currentOption == options[0] ? null : "translate-x-full"
-              } rounded-full bg-red-600 transition-transform duration-200 ease-in-out`}
+              } bg-clr-one rounded-full transition-transform duration-200 ease-in-out`}
             />
           </div>
         ) : null}

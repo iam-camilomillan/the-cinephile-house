@@ -72,7 +72,7 @@ const HomeHero = ({ movie }: { movie: Movie }) => {
             <div className="h-2" />
 
             {/* Movie description */}
-            <p className="max-h-24 overflow-y-scroll rounded-md bg-black/75 px-2 py-1 text-white/80 scrollbar-thin scrollbar-thumb-white/10">
+            <p className="max-h-24 overflow-y-scroll rounded-md bg-black/75 px-2 py-1 text-white/90 scrollbar-thin scrollbar-thumb-white/10">
               {movie.overview}
             </p>
 
@@ -87,7 +87,7 @@ const HomeHero = ({ movie }: { movie: Movie }) => {
               {/* Where to watch container */}
               <Link
                 href={`/movies/${movie.id}`}
-                className="px-2 py-1 text-white/80 transition-colors duration-200 ease-in-out hover:text-white"
+                className="px-2 py-1 text-white/90 transition-colors duration-200 ease-in-out hover:text-white"
               >
                 Where to watch?
               </Link>

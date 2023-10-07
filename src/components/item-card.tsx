@@ -24,7 +24,7 @@ const ItemCard = ({ data }: any) => {
     >
       {/* Buttons options */}
       <div
-        className={`absolute right-2 top-2 z-10 flex gap-2 rounded-md bg-red-600 px-2 py-1 text-lg text-white ${
+        className={`absolute right-2 top-2 z-10 flex gap-2 rounded-md bg-clr-one px-2 py-1 text-lg text-white ${
           isHovering ? "opacity-100" : "opacity-0"
         } transition-opacity duration-200 ease-in-out`}
       >
@@ -63,13 +63,13 @@ const ItemCard = ({ data }: any) => {
       {/* Title */}
       <Link
         href={`/movies/${data.id}`}
-        className="whitespace-break-spaces font-medium hover:text-red-600"
+        className="whitespace-break-spaces font-medium hover:text-clr-one"
       >
         {data.title ?? data.name}
       </Link>
 
       {/* Release date */}
-      <p className="text-sm text-black/80">
+      <p className="text-sm text-black/90">
         {data.release_date ?? data.first_air_date}
       </p>
     </div>
