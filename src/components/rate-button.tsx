@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
+/* Context imports */
+import { useAuth } from "~/context/AuthContext";
+import { useData } from "~/context/DataContext";
+
 /* Icons imports */
 import { FaRegStar, FaStar } from "react-icons/fa";
 
 /* Types imports */
 import type { Movie } from "types";
-
-/* Context imports */
-import { useAuth } from "~/context/AuthContext";
-import { useData } from "~/context/DataContext";
 
 const RateButton = ({ movie }: { movie: Movie }) => {
   /* Context */
@@ -41,11 +41,8 @@ const RateButton = ({ movie }: { movie: Movie }) => {
   return (
     <>
       {/* Rating from TMDB */}
-      <span className="text-sm text-white/80">
-        TMDB:{" "}
-        <span className="text-base font-medium text-white">
-          {movie.vote_average}
-        </span>
+      <span className="text-sm opacity-80">
+        TMDB: <span className="text-base font-bold">{movie.vote_average}</span>
         /10
       </span>
       <span>&#8226;</span>

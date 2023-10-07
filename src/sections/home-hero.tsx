@@ -1,47 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 /* Components imports */
-import RateButton from "~/components/RateButton";
+import RateButton from "~/components/rate-button";
 import AddToButtons from "~/components/add-to-buttons";
+import PlayTrailerButton from "~/components/play-trailer-button";
 
 /* React spinners imports */
 import { ClipLoader } from "react-spinners";
-
-/* Icons imports */
-import { FaPlayCircle } from "react-icons/fa";
-
-/* Utils imports */
-import { api } from "~/utils/api";
 
 /* Types imports */
 import type { Movie } from "types";
 
 const HomeHero = ({ movie }: { movie: Movie }) => {
-  const [trailer, setTrailer] = useState<any>(null);
-
   /* Utils */
   const [isLoading, setIsLoading] = useState(true);
 
-  /* Data fetching */
-  const videosRequest = api.tmbd.videos.useQuery({
-    categorie: "movie",
-    id: movie.id,
-  });
-
-  useEffect(() => {
-    if (videosRequest.data?.results) {
-      for (const video of videosRequest.data?.results) {
-        if (video.type == "Trailer") {
-          setTrailer(video);
-          break;
-        }
-      }
-    }
-  }, [videosRequest.data]);
-
-  return movie ? (
+  return (
     <section className="relative h-screen">
       {/* Background image */}
       <Image
@@ -106,14 +82,7 @@ const HomeHero = ({ movie }: { movie: Movie }) => {
             {/* Play trailer and where to watch */}
             <div className="flex items-center gap-2">
               {/* Play trailer */}
-              <a
-                href={`https://www.youtube.com/watch?v=${trailer?.key}`}
-                target="_blank"
-                className="flex items-center gap-1 rounded-md bg-red-600 px-2 py-1 text-lg transition-colors duration-200 ease-in-out hover:bg-red-500"
-              >
-                <FaPlayCircle className="text-xl" />
-                Play trailer
-              </a>
+              <PlayTrailerButton id={movie.id} />
 
               {/* Where to watch container */}
               <Link
@@ -127,7 +96,7 @@ const HomeHero = ({ movie }: { movie: Movie }) => {
         </div>
       </div>
     </section>
-  ) : null;
+  );
 };
 
 export default HomeHero;
