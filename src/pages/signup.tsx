@@ -64,7 +64,7 @@ const Signup = () => {
       {/* Content container */}
       <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black/75 px-8 text-white">
         {/* Register page title */}
-        <h2 className="text-center text-2xl text-white/80">
+        <h2 className="text-center text-2xl text-white/90">
           Register to{" "}
           <span className="font-bold text-white">TheCinephileHouse</span>
         </h2>
@@ -128,23 +128,23 @@ const Signup = () => {
           {/* Register with email and password button */}
           <button
             type="submit"
-            className="w-full rounded-md bg-red-600 px-2 py-1 font-medium transition-colors duration-200 ease-in-out hover:bg-red-500"
+            className="w-full rounded-md bg-clr-one px-2 py-1 font-medium transition-colors duration-200 ease-in-out hover:bg-clr-one/90"
           >
             Register
           </button>
 
           {/* Divider */}
           <div className="flex w-full items-center justify-center gap-2 py-2">
-            <div className="h-px w-20 bg-white/80  " />
+            <div className="h-px w-20 bg-white/90  " />
             <span>or</span>
-            <div className="h-px w-20 bg-white/80  " />
+            <div className="h-px w-20 bg-white/90  " />
           </div>
 
           {/* Log in with google button */}
           <button
             type="button"
             onClick={() => handleGoogleLogIn()}
-            className="flex w-full items-center justify-center gap-1 rounded-md bg-white px-2 py-1 font-medium text-black transition-colors duration-200 ease-in-out hover:bg-white/80"
+            className="flex w-full items-center justify-center gap-1 rounded-md bg-white px-2 py-1 font-medium text-black transition-colors duration-200 ease-in-out hover:bg-white/90"
           >
             <FaGoogle />
             Log in with Google
@@ -155,11 +155,11 @@ const Signup = () => {
         <div className="h-1" />
 
         {/*  */}
-        <p className="text-white/80">
+        <p className="text-white/90">
           Already have an account?{" "}
           <Link
             href="/login"
-            className="text-white transition-colors duration-200 ease-in-out hover:text-slate-50/80"
+            className="text-white transition-colors duration-200 ease-in-out hover:text-slate-50/90"
           >
             Login now!
           </Link>
@@ -167,7 +167,7 @@ const Signup = () => {
       </div>
 
       {/* Demo account */}
-      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-white/80">
+      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-white/90">
         Demo account email:{" "}
         <span className="text-white">demo@thecinephilehouse.com</span>
         <br />

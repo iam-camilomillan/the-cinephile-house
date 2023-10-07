@@ -66,7 +66,7 @@ const Login = () => {
       {/* Content container */}
       <div className="absolute flex h-full w-full flex-col items-center justify-center bg-black/75 px-8 text-white">
         {/* Log in page title */}
-        <h2 className="text-center text-2xl text-white/80">
+        <h2 className="text-center text-2xl text-white/90">
           Log in to{" "}
           <span className="font-bold text-white">The Cinephile House</span>
         </h2>
@@ -102,7 +102,7 @@ const Login = () => {
             <button
               type="button"
               onClick={handleForgot}
-              className="text-white/80 transition-colors duration-200 ease-in-out hover:text-white"
+              className="text-white/90 transition-colors duration-200 ease-in-out hover:text-white"
             >
               Forgot?
             </button>
@@ -124,23 +124,23 @@ const Login = () => {
           {/* Log in with email and password button */}
           <button
             type="submit"
-            className="w-full rounded-md bg-red-600 px-2 py-1 font-medium transition-colors duration-200 ease-in-out hover:bg-red-500"
+            className="w-full rounded-md bg-clr-one px-2 py-1 font-medium transition-colors duration-200 ease-in-out hover:bg-clr-one/90"
           >
             Log in
           </button>
 
           {/* Divider */}
           <div className="flex w-full items-center justify-center gap-2 py-2">
-            <div className="h-px w-20 bg-white/80  " />
+            <div className="h-px w-20 bg-white/90  " />
             <span>or</span>
-            <div className="h-px w-20 bg-white/80  " />
+            <div className="h-px w-20 bg-white/90  " />
           </div>
 
           {/* Log in with google button */}
           <button
             type="button"
             onClick={handleGoogleLogIn}
-            className="flex w-full items-center justify-center gap-1 rounded-md bg-white px-2 py-1 font-medium text-black transition-colors duration-200 ease-in-out hover:bg-white/80"
+            className="flex w-full items-center justify-center gap-1 rounded-md bg-white px-2 py-1 font-medium text-black transition-colors duration-200 ease-in-out hover:bg-white/90"
           >
             <FaGoogle />
             Log in with Google
@@ -151,11 +151,11 @@ const Login = () => {
         <div className="h-1" />
 
         {/*  */}
-        <p className="text-white/80">
+        <p className="text-white/90">
           Don&#39;t have an account?{" "}
           <Link
-            href="/signin"
-            className="text-white transition-colors duration-200 ease-in-out hover:text-slate-50/80"
+            href="/signup"
+            className="text-white transition-colors duration-200 ease-in-out hover:text-slate-50/90"
           >
             Register now!
           </Link>
@@ -163,7 +163,7 @@ const Login = () => {
       </div>
 
       {/* Demo account */}
-      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-white/80">
+      <p className="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-white/90">
         Demo account email:{" "}
         <span className="text-white">demo@thecinephilehouse.com</span>
         <br />
