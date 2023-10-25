@@ -1,7 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-.custom-underline {
-  @apply relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-0 after:bg-clr-one after:duration-200 hover:after:w-full;
-}

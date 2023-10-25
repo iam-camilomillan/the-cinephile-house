@@ -1,16 +1,18 @@
-import { type Config } from "tailwindcss";
+import type { Config } from "tailwindcss";
 
-export default {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+import { nextui } from "@nextui-org/react";
+
+const config: Config = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
-    fontFamily: {
-      inter: ["var(--font-inter)"],
-    },
-    extend: {
-      colors: {
-        "clr-one": "#e63946",
-      },
-    },
+    extend: {},
   },
-  plugins: [require("tailwind-scrollbar")],
-} satisfies Config;
+  darkMode: "class",
+  plugins: [nextui()],
+};
+export default config;
