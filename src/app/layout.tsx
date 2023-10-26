@@ -4,6 +4,9 @@ import { type Metadata } from "next";
 /* Providers imports */
 import { Providers } from "./providers";
 
+/* Components imports */
+import NavbarServer from "./components/navbar-server";
+
 /* Metadata declaration */
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -14,10 +17,10 @@ export const metadata: Metadata = {
 import "./globals.css";
 
 /* Fonts imports */
-import { Open_Sans } from "next/font/google";
+import { Inter } from "next/font/google";
 
 /* Fonts declarations */
-const openSans = Open_Sans({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -25,9 +28,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`light ${openSans.className}`}>
+    <html lang="en" className={`light ${inter.className} dark`}>
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {/* Navbar */}
+          <NavbarServer />
+
+          {children}
+        </Providers>
       </body>
     </html>
   );
