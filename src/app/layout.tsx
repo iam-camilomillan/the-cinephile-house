@@ -2,10 +2,10 @@
 import { type Metadata } from "next";
 
 /* Providers imports */
-import { Providers } from "./providers";
+import { Providers } from "@/app/providers";
 
 /* Components imports */
-import NavbarServer from "./components/navbar-server";
+import NavbarServer from "@/components/navbar-server";
 
 /* Metadata declaration */
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 /* Styles imports */
-import "./globals.css";
+import "@/app/globals.css";
 
 /* Fonts imports */
 import { Inter } from "next/font/google";

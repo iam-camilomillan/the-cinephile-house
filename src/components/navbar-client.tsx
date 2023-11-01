@@ -43,7 +43,13 @@ export default function NavbarClient({ session }: { session: Session | null }) {
   };
 
   return (
-    <Navbar isBordered isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      isBordered
+      shouldHideOnScroll
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+      maxWidth="xl"
+    >
       <NavbarContent className="sm:hidden" justify="start">
         {/* Mobile menu toggler */}
         <NavbarMenuToggle
