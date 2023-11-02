@@ -13,12 +13,21 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: "#dc2626",
+        secondary: "#ef4444",
+      },
       screens: {
         xs: "480px",
       },
     },
   },
   darkMode: "class",
-  plugins: [nextui(), require("tailwind-scrollbar")],
+  plugins: [
+    nextui({
+      addCommonColors: true,
+    }),
+    require("tailwind-scrollbar"),
+  ],
 };
 export default config;

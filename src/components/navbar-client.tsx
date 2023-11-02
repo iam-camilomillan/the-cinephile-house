@@ -59,7 +59,7 @@ export default function NavbarClient({ session }: { session: Session | null }) {
         {/* Navbar brand */}
         <NavbarBrand>
           <Link href="/" className="hover:opacity-100" color="foreground">
-            <IconMovie className="-rotate-45 text-red-600" />
+            <IconMovie className="-rotate-45 text-primary" />
             <span className="font-bold">TheCinephileHouse</span>
           </Link>
         </NavbarBrand>
@@ -70,7 +70,7 @@ export default function NavbarClient({ session }: { session: Session | null }) {
         {/* Navbar brand */}
         <NavbarBrand>
           <Link href="/" className="hover:opacity-100" color="foreground">
-            <IconMovie className="-rotate-45 text-red-600" />
+            <IconMovie className="-rotate-45 text-primary" />
             <span className="font-bold">TheCinephileHouse</span>
           </Link>
         </NavbarBrand>
@@ -110,12 +110,12 @@ export default function NavbarClient({ session }: { session: Session | null }) {
           <Dropdown placement="bottom-end">
             <DropdownTrigger>
               <Avatar
-                isBordered
                 as="button"
-                className="transition-transform"
-                color="danger"
-                size="sm"
                 src={session.user.avatar}
+                color="primary"
+                size="sm"
+                isBordered
+                className="ring-primary transition-transform"
               />
             </DropdownTrigger>
 
@@ -126,7 +126,7 @@ export default function NavbarClient({ session }: { session: Session | null }) {
                   className="h-full w-full"
                   color="foreground"
                 >
-                  Profile
+                  <span>Profile</span>
                 </Link>
               </DropdownItem>
 
@@ -136,12 +136,12 @@ export default function NavbarClient({ session }: { session: Session | null }) {
                   className="h-full w-full"
                   color="foreground"
                 >
-                  Lists
+                  <span>Lists</span>
                 </Link>
               </DropdownItem>
 
               {/* Log out button */}
-              <DropdownItem key="logout" color="danger">
+              <DropdownItem key="logout" color="primary">
                 <button
                   type="button"
                   onClick={handleLogOut}
@@ -167,8 +167,8 @@ export default function NavbarClient({ session }: { session: Session | null }) {
             <Button
               as={Link}
               href="/signup"
-              className="font-bold"
-              color="danger"
+              color="primary"
+              className="font-bold hover:bg-secondary hover:opacity-100"
             >
               Sign Up
             </Button>

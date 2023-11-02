@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 /* Styles imports */
-import "@/app/globals.css";
+import "@/styles/globals.css";
 
 /* Fonts imports */
 import { Inter } from "next/font/google";

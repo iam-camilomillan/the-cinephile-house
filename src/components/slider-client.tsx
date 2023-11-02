@@ -47,11 +47,12 @@ export default function SliderClient({ data }: { data: Movie[] }) {
       {/* Previous button */}
       <Button
         onPress={handleClickPrevious}
-        isIconOnly
+        color="primary"
         radius="full"
+        isIconOnly
         className={`absolute left-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } -translate-x-1/2 hover:text-red-600`}
+        } -translate-x-1/2`}
       >
         <IconChevronLeft />
       </Button>
@@ -69,9 +70,12 @@ export default function SliderClient({ data }: { data: Movie[] }) {
       {/* Next button */}
       <Button
         onPress={handleClickNext}
-        isIconOnly
+        color="primary"
         radius="full"
-        className="absolute right-0 z-20 translate-x-1/2 hover:text-red-600"
+        isIconOnly
+        className={`absolute right-0 z-20 ${
+          showControls ? "flex" : "hidden"
+        } translate-x-1/2`}
       >
         <IconChevronRight />
       </Button>
