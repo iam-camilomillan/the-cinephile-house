@@ -107,7 +107,10 @@ export default function NavbarClient({ session }: { session: Session | null }) {
       {/* Navigation authorization links */}
       {session ? (
         <NavbarContent as="div" justify="end">
-          <Dropdown placement="bottom-end">
+          <Dropdown
+            placement="bottom-end"
+            classNames={{ base: "bg-neutral-900" }}
+          >
             <DropdownTrigger>
               <Avatar
                 as="button"

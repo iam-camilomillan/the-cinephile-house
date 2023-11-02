@@ -6,6 +6,7 @@ import { Providers } from "@/app/providers";
 
 /* Components imports */
 import NavbarServer from "@/components/navbar-server";
+import FooterServer from "@/components/footer-server";
 
 /* Metadata declaration */
 export const metadata: Metadata = {
@@ -35,6 +36,9 @@ export default function RootLayout({
           <NavbarServer />
 
           {children}
+
+          {/* Footer */}
+          <FooterServer />
         </Providers>
       </body>
     </html>

@@ -1,29 +1,31 @@
 "use client";
 
+/* Next imports */
+import { useRouter } from "next/navigation";
+
 /* NextUI imports */
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
 /* Types imports */
-import { type Movie } from "types";
+import { type Movie, type TVShow } from "types";
 
-/* Router imports */
-import { useRouter } from "next/navigation";
-
-export default function CardClient({ data }: { data: Movie }) {
+export default function CardClient({ data }: { data: Movie | TVShow }) {
   /* Router definition */
   const router = useRouter();
 
   return (
     <Card
       isPressable
-      onPress={() => router.push(`/movies/${data.id}`)}
-      className="w-32 flex-shrink-0 hover:scale-105 xs:w-40"
+      onPress={() =>
+        router.push(`/${"title" in data ? "movies" : "tv-shows"}/${data.id}`)
+      }
+      className="w-32 flex-shrink-0 bg-neutral-900 hover:scale-105 xs:w-40"
     >
       {/* Card image */}
       <CardBody className="overflow-visible p-0">
         <Image
           src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
-          alt={data.title}
+          alt={"title" in data ? data.title : data.name}
           width={160}
           height={240}
           radius="lg"
@@ -34,7 +36,9 @@ export default function CardClient({ data }: { data: Movie }) {
       {/* Card content */}
       <CardFooter className="flex-grow items-start">
         {/* Card title */}
-        <b className="text-xs xs:text-sm">{data.title}</b>
+        <b className="text-xs xs:text-sm">
+          {"title" in data ? data.title : data.name}
+        </b>
       </CardFooter>
     </Card>
   );

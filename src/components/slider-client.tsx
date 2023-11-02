@@ -13,9 +13,9 @@ import { Button } from "@nextui-org/react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 /* Types imports */
-import { type Movie } from "types";
+import { type Movie, type TVShow } from "types";
 
-export default function SliderClient({ data }: { data: Movie[] }) {
+export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
   /* State to show controls */
   const [showControls, setShowControls] = useState(false);
 

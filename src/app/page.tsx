@@ -4,36 +4,93 @@ import NextLink from "next/link";
 
 /* Components imports */
 import PlayTrailerButtonClient from "@/components/play-trailer-button-client";
-import SliderClient from "@/components/slider-client";
+import ContentModule from "@/components/content-module";
 
 /* NextUI imports */
 import { Image, Link, ScrollShadow } from "@nextui-org/react";
 
 /* Types imports */
-import { type TMDBRequest, type Movie } from "types";
+import { type TMDBMovieRequest, type TMDBTVShowRequest } from "types";
 
 /* Env variables imports */
 import { env } from "process";
 
+/* Utils imports */
+import { getRandomNumber } from "@/utils/getRandomNumber";
+
 export default async function Home() {
-  const movie = await fetch(
-    `https://api.themoviedb.org/3/movie/575264?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as Movie;
-
-    return data;
-  });
-
-  const movies = await fetch(
+  const popularMovies = await fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${env.TMDB_API_KEY}&language=en-US`,
   ).then(async (response) => {
-    const data = (await response.json()) as TMDBRequest;
+    const data = (await response.json()) as TMDBMovieRequest;
 
     return data.results;
   });
 
+  const popularTVShows = await fetch(
+    `https://api.themoviedb.org/3/tv/popular?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const onAirToday = await fetch(
+    `https://api.themoviedb.org/3/tv/airing_today?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const onAirThisWeek = await fetch(
+    `https://api.themoviedb.org/3/tv/on_the_air?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const topRatedMovies = await fetch(
+    `https://api.themoviedb.org/3/movie/top_rated?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBMovieRequest;
+
+    return data.results;
+  });
+
+  const topRatedTVShows = await fetch(
+    `https://api.themoviedb.org/3/tv/top_rated?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const onTheatres = await fetch(
+    `https://api.themoviedb.org/3/movie/now_playing?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const comingSoon = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBTVShowRequest;
+
+    return data.results;
+  });
+
+  const movie = popularMovies[getRandomNumber(0, 20)];
+
+  if (!movie) {
+    return null;
+  }
+
   return (
-    <main>
+    <main className="pb-8">
       {/* Hero section */}
       <section className="relative">
         {/* Hero background image */}
@@ -89,21 +146,67 @@ export default async function Home() {
       </section>
 
       {/* Content section */}
-      <section className="h-screen p-8">
+      <section className="p-8">
         {/* Content module */}
-        <div>
-          {/* Module header */}
-          <div>
-            {/* Module title */}
-            <h2 className="text-2xl font-bold">Trending</h2>
-          </div>
+        <ContentModule
+          title="Trending"
+          options={[
+            { key: "one", title: "Movies" },
+            { key: "two", title: "TV Shows" },
+          ]}
+          dataOne={popularMovies}
+          dataTwo={popularTVShows}
+        />
 
-          {/* Separator */}
-          <div className="h-4" />
+        {/* Separator */}
+        <div className="h-12" />
 
-          {/* Slider */}
-          <SliderClient data={movies} />
-        </div>
+        {/* Content module */}
+        <ContentModule
+          title="On air"
+          options={[
+            { key: "one", title: "Today" },
+            { key: "two", title: "This week" },
+          ]}
+          dataOne={onAirToday}
+          dataTwo={onAirThisWeek}
+        />
+
+        {/* Separator */}
+        <div className="h-12" />
+
+        {/* Content module */}
+        <ContentModule
+          title="Top rated"
+          options={[
+            { key: "one", title: "Movies" },
+            { key: "two", title: "TV Shows" },
+          ]}
+          dataOne={topRatedMovies}
+          dataTwo={topRatedTVShows}
+        />
+
+        {/* Separator */}
+        <div className="h-12" />
+
+        {/* Content module */}
+        <ContentModule
+          title="On theatres"
+          options={[{ key: "one", title: "Movies" }]}
+          dataOne={onTheatres}
+          dataTwo={null}
+        />
+
+        {/* Separator */}
+        <div className="h-12" />
+
+        {/* Content module */}
+        <ContentModule
+          title="Coming soon"
+          options={[{ key: "one", title: "Movies" }]}
+          dataOne={comingSoon}
+          dataTwo={null}
+        />
       </section>
     </main>
   );
