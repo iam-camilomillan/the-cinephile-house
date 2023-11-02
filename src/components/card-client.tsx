@@ -24,9 +24,10 @@ export default function CardClient({ data }: { data: Movie }) {
         <Image
           src={`https://image.tmdb.org/t/p/original${data.poster_path}`}
           alt={data.title}
-          width="100%"
+          width={160}
+          height={240}
           radius="lg"
-          className="h-48 w-full object-cover object-center xs:h-56"
+          className="h-48 w-full object-cover object-center xs:h-60"
         />
       </CardBody>
 

@@ -40,8 +40,8 @@ export default async function Home() {
         <Image
           src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
           alt="Movie hero image"
-          width={1280}
-          height={720}
+          width={1920}
+          height={1080}
           as={NextImage}
           removeWrapper
           radius="none"
