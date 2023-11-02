@@ -4,12 +4,13 @@ import NextLink from "next/link";
 
 /* Components imports */
 import PlayTrailerButtonClient from "@/components/play-trailer-button-client";
+import SliderClient from "@/components/slider-client";
 
 /* NextUI imports */
 import { Image, Link, ScrollShadow } from "@nextui-org/react";
 
 /* Types imports */
-import { type Movie } from "types";
+import { type TMDBRequest, type Movie } from "types";
 
 /* Env variables imports */
 import { env } from "process";
@@ -21,6 +22,14 @@ export default async function Home() {
     const data = (await response.json()) as Movie;
 
     return data;
+  });
+
+  const movies = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${env.TMDB_API_KEY}&language=en-US`,
+  ).then(async (response) => {
+    const data = (await response.json()) as TMDBRequest;
+
+    return data.results;
   });
 
   return (
@@ -54,7 +63,7 @@ export default async function Home() {
             <div className="h-4" />
 
             {/* Movie description */}
-            <ScrollShadow className="max-h-24 scrollbar-thin scrollbar-track-gray-900 scrollbar-thumb-gray-300">
+            <ScrollShadow className="max-h-24 scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600">
               <p>{movie.overview}</p>
             </ScrollShadow>
 
@@ -76,6 +85,24 @@ export default async function Home() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Content section */}
+      <section className="h-screen p-8">
+        {/* Content module */}
+        <div>
+          {/* Module header */}
+          <div>
+            {/* Module title */}
+            <h2 className="text-2xl font-bold">Trending</h2>
+          </div>
+
+          {/* Separator */}
+          <div className="h-4" />
+
+          {/* Slider */}
+          <SliderClient data={movies} />
         </div>
       </section>
     </main>
