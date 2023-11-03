@@ -52,7 +52,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute left-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } -translate-x-1/2`}
+        } -translate-x-1/2 hover:bg-secondary`}
       >
         <IconChevronLeft />
       </Button>
@@ -75,7 +75,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute right-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } translate-x-1/2`}
+        } translate-x-1/2 hover:bg-secondary`}
       >
         <IconChevronRight />
       </Button>
