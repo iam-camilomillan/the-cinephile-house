@@ -95,11 +95,11 @@ export default async function Home() {
       <section className="relative">
         {/* Hero background image */}
         <Image
+          as={NextImage}
           src={`https://image.tmdb.org/t/p/original${movie?.backdrop_path}`}
           alt="Movie hero image"
           width={1920}
           height={1080}
-          as={NextImage}
           removeWrapper
           radius="none"
           className="h-[90vh] w-full object-cover object-center"
