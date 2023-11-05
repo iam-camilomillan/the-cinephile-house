@@ -19,10 +19,11 @@ import {
   Avatar,
   DropdownMenu,
   DropdownItem,
+  Input,
 } from "@nextui-org/react";
 
 /* Icons imports */
-import { IconMovie } from "@tabler/icons-react";
+import { IconMovie, IconSearch } from "@tabler/icons-react";
 
 /* Temporary Session type */
 type Session = {
@@ -36,6 +37,9 @@ type Session = {
 export default function NavbarClient({ session }: { session: Session | null }) {
   /* Mobile menu state */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  /* Search state */
+  const [searchInputValue, setSearchInputValue] = useState("");
 
   /* Handle log out  */
   const handleLogOut = () => {
@@ -84,29 +88,28 @@ export default function NavbarClient({ session }: { session: Session | null }) {
 
         {/* Movies link */}
         <NavbarItem>
-          <Link href="/movies" color="foreground">
-            Movies
-          </Link>
-        </NavbarItem>
-
-        {/* TV Shows link */}
-        <NavbarItem>
-          <Link href="/tv-shows" color="foreground">
-            TV Shows
-          </Link>
-        </NavbarItem>
-
-        {/* Top Rated link */}
-        <NavbarItem>
-          <Link href="/top-rated" color="foreground">
-            Top Rated
+          <Link href="/explore" color="foreground">
+            Explore
           </Link>
         </NavbarItem>
       </NavbarContent>
 
       {/* Navigation authorization links */}
-      {session ? (
-        <NavbarContent as="div" justify="end">
+      <NavbarContent as="div" justify="end">
+        <Input
+          isClearable
+          radius="lg"
+          placeholder="Search movies or TV shows"
+          startContent={<IconSearch />}
+          classNames={{
+            inputWrapper: "bg-neutral-900",
+          }}
+          value={searchInputValue}
+          onValueChange={setSearchInputValue}
+          className="hidden md:flex"
+        />
+
+        {session ? (
           <Dropdown
             placement="bottom-end"
             classNames={{ base: "bg-neutral-900" }}
@@ -155,29 +158,29 @@ export default function NavbarClient({ session }: { session: Session | null }) {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
-        </NavbarContent>
-      ) : (
-        <NavbarContent justify="end">
-          {/* Login link */}
-          <NavbarItem className="hidden xs:flex sm:hidden md:flex">
-            <Link href="/login" color="foreground">
-              Login
-            </Link>
-          </NavbarItem>
+        ) : (
+          <>
+            {/* Login link */}
+            <NavbarItem className="hidden xs:flex sm:hidden md:flex">
+              <Link href="/login" color="foreground">
+                Login
+              </Link>
+            </NavbarItem>
 
-          {/* Sign up button link */}
-          <NavbarItem>
-            <Button
-              as={Link}
-              href="/signup"
-              color="primary"
-              className="font-bold hover:bg-secondary hover:opacity-100"
-            >
-              Sign Up
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-      )}
+            {/* Sign up button link */}
+            <>
+              <Button
+                as={Link}
+                href="/signup"
+                color="primary"
+                className="font-bold hover:bg-secondary hover:opacity-100"
+              >
+                Sign Up
+              </Button>
+            </>
+          </>
+        )}
+      </NavbarContent>
 
       {/* Mobile */}
       <NavbarMenu>

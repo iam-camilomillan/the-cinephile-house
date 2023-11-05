@@ -20,12 +20,15 @@ import {
 import { type FormEvent } from "react";
 
 export default function Page() {
-  /* Login states */
+  /* Sign up states */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   /* Utils states */
   const [isPasswordVisible, setPasswordIsVisible] = useState(false);
+  const [isConfirmPasswordVisible, setConfirmPasswordIsVisible] =
+    useState(false);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -38,11 +41,11 @@ export default function Page() {
   return (
     <main>
       <section className="relative h-[90vh]">
-        {/* Log in background image */}
+        {/* Sign up background image */}
         <Image
           as={NextImage}
           src="/images/auth-background.jpg"
-          alt="Log in background image"
+          alt="Sign up background image"
           width={1920}
           height={1080}
           priority
@@ -51,7 +54,7 @@ export default function Page() {
 
         {/* Content container */}
         <div className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center bg-black/75 px-8 text-white">
-          {/* Log in page title */}
+          {/* Sign up page title */}
           <h2 className="text-center text-2xl text-white/90">
             Sign up to <IconMovie className="inline -rotate-45 text-primary" />
             <span className="font-bold text-white">The Cinephile House</span>
@@ -60,7 +63,7 @@ export default function Page() {
           {/* Separator */}
           <div className="h-8" />
 
-          {/* Log in form container */}
+          {/* Sign up form container */}
           <form
             onSubmit={handleSubmit}
             className="flex w-full max-w-xs flex-col items-start rounded-xl border border-neutral-900 bg-neutral-950 p-4"
@@ -70,7 +73,7 @@ export default function Page() {
               type="email"
               label="Email"
               labelPlacement="outside"
-              placeholder="demo@thecinephilehouse.com"
+              placeholder=""
               value={email}
               onValueChange={setEmail}
               classNames={{
@@ -86,7 +89,7 @@ export default function Page() {
               type={isPasswordVisible ? "text" : "password"}
               label="Password"
               labelPlacement="outside"
-              placeholder="demopassword"
+              placeholder=""
               endContent={
                 <button
                   className="focus:outline-none"
@@ -108,16 +111,47 @@ export default function Page() {
             />
 
             {/* Separator */}
+            <div className="h-2" />
+
+            {/* Confirm password input */}
+            <Input
+              type={isConfirmPasswordVisible ? "text" : "password"}
+              label="Confirm password"
+              labelPlacement="outside"
+              placeholder=""
+              endContent={
+                <button
+                  className="focus:outline-none"
+                  type="button"
+                  onClick={() =>
+                    setConfirmPasswordIsVisible(!isConfirmPasswordVisible)
+                  }
+                >
+                  {isConfirmPasswordVisible ? (
+                    <IconEyeClosed className="pointer-events-none text-2xl text-default-400" />
+                  ) : (
+                    <IconEye className="pointer-events-none text-2xl text-default-400" />
+                  )}
+                </button>
+              }
+              value={confirmPassword}
+              onValueChange={setConfirmPassword}
+              classNames={{
+                inputWrapper: "bg-neutral-900",
+              }}
+            />
+
+            {/* Separator */}
             <div className="h-8" />
 
-            {/* Log in with email and password button */}
+            {/* Sign up with email and password button */}
             <Button
               type="submit"
               color="primary"
               fullWidth
               className="hover:bg-secondary"
             >
-              <span className="font-bold">Log in</span>
+              <span className="font-bold">Register</span>
             </Button>
 
             {/* Divider */}
@@ -144,9 +178,9 @@ export default function Page() {
 
           {/*  */}
           <p>
-            <span className="text-white/80">Don&#39;t have an account?</span>{" "}
-            <Link href="/signup" color="foreground">
-              <span>Register now&#33;</span>
+            <span className="text-white/80">Already have an account?</span>{" "}
+            <Link href="/login" color="foreground">
+              <span>Log in now&#33;</span>
             </Link>
           </p>
         </div>

@@ -4,7 +4,7 @@
 import { useRef, useState } from "react";
 
 /* Components imports */
-import CardClient from "./card-client";
+import CardClient from "~/app/_components/card-client";
 
 /* NextUI imports */
 import { Button } from "@nextui-org/react";
@@ -52,7 +52,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute left-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } -translate-x-1/2 hover:bg-secondary`}
+        } hover:bg-secondary -translate-x-1/2`}
       >
         <IconChevronLeft />
       </Button>
@@ -60,7 +60,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
       {/* Cards container */}
       <div
         ref={sliderRef}
-        className="flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2 scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600"
+        className="scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600 flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2"
       >
         {data.map((item, index) => (
           <CardClient key={index} data={item} />
@@ -75,7 +75,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute right-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } translate-x-1/2 hover:bg-secondary`}
+        } hover:bg-secondary translate-x-1/2`}
       >
         <IconChevronRight />
       </Button>

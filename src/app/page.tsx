@@ -3,84 +3,69 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 
 /* Components imports */
-import PlayTrailerButtonClient from "@/components/play-trailer-button-client";
-import ContentModule from "@/components/content-module";
+import PlayTrailerButtonClient from "~/app/_components/play-trailer-button-client";
+import ContentModule from "~/app/_components/content-module";
 
 /* NextUI imports */
 import { Image, Link, ScrollShadow } from "@nextui-org/react";
 
-/* Types imports */
-import { type TMDBMovieRequest, type TMDBTVShowRequest } from "types";
-
-/* Env variables imports */
-import { env } from "process";
-
 /* Utils imports */
-import { getRandomNumber } from "@/utils/getRandomNumber";
+import { getRandomNumber } from "~/utils/getRandomNumber";
+
+import { getServerAuthSession } from "~/server/auth";
+
+/* API imports */
+import { api } from "~/trpc/server";
 
 export default async function Home() {
-  const popularMovies = await fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBMovieRequest;
+  /* const session = await getServerAuthSession(); */
 
-    return data.results;
+  const popularMovies = await api.tmdb.get.query({
+    type: "movie",
+    header: "popular",
+    page: 1,
   });
 
-  const popularTVShows = await fetch(
-    `https://api.themoviedb.org/3/tv/popular?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const popularTVShows = await api.tmdb.get.query({
+    type: "tv",
+    header: "popular",
+    page: 1,
   });
 
-  const onAirToday = await fetch(
-    `https://api.themoviedb.org/3/tv/airing_today?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const onAirToday = await api.tmdb.get.query({
+    type: "tv",
+    header: "airing_today",
+    page: 1,
   });
 
-  const onAirThisWeek = await fetch(
-    `https://api.themoviedb.org/3/tv/on_the_air?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const onAirThisWeek = await api.tmdb.get.query({
+    type: "tv",
+    header: "on_the_air",
+    page: 1,
   });
 
-  const topRatedMovies = await fetch(
-    `https://api.themoviedb.org/3/movie/top_rated?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBMovieRequest;
-
-    return data.results;
+  const topRatedMovies = await api.tmdb.get.query({
+    type: "movie",
+    header: "top_rated",
+    page: 1,
   });
 
-  const topRatedTVShows = await fetch(
-    `https://api.themoviedb.org/3/tv/top_rated?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const topRatedTVShows = await api.tmdb.get.query({
+    type: "tv",
+    header: "top_rated",
+    page: 1,
   });
 
-  const onTheatres = await fetch(
-    `https://api.themoviedb.org/3/movie/now_playing?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const onTheatres = await api.tmdb.get.query({
+    type: "movie",
+    header: "now_playing",
+    page: 1,
   });
 
-  const comingSoon = await fetch(
-    `https://api.themoviedb.org/3/movie/upcoming?api_key=${env.TMDB_API_KEY}&language=en-US`,
-  ).then(async (response) => {
-    const data = (await response.json()) as TMDBTVShowRequest;
-
-    return data.results;
+  const comingSoon = await api.tmdb.get.query({
+    type: "movie",
+    header: "upcoming",
+    page: 1,
   });
 
   const movie = popularMovies[getRandomNumber(0, 20)];
@@ -110,7 +95,9 @@ export default async function Home() {
           <div className="flex h-full max-w-sm flex-col justify-center">
             {/* Movie title */}
             <Link href={`/movies/${movie.id}`} as={NextLink} color="foreground">
-              <h2 className="text-4xl font-bold">{movie.title}</h2>
+              <h2 className="text-4xl font-bold">
+                {"title" in movie ? movie.title : null}
+              </h2>
             </Link>
 
             {/* Separator */}
@@ -211,3 +198,22 @@ export default async function Home() {
     </main>
   );
 }
+
+/* async function CrudShowcase() {
+  const session = await getServerAuthSession();
+  if (!session?.user) return null;
+
+  const latestPost = await api.post.getLatest.query();
+
+  return (
+    <div className="w-full max-w-xs">
+      {latestPost ? (
+        <p className="truncate">Your most recent post: {latestPost.name}</p>
+      ) : (
+        <p>You have no posts yet.</p>
+      )}
+
+      <CreatePost />
+    </div>
+  );
+} */

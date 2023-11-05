@@ -1,14 +1,15 @@
 /* TailwindCSS imports */
-import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 /* NextUI imports */
 import { nextui } from "@nextui-org/react";
 
-const config: Config = {
+/* Types imports */
+import { type Config } from "tailwindcss";
+
+export default {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.tsx",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
@@ -20,6 +21,9 @@ const config: Config = {
       screens: {
         xs: "480px",
       },
+      fontFamily: {
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+      },
     },
   },
   darkMode: "class",
@@ -29,5 +33,4 @@ const config: Config = {
     }),
     require("tailwind-scrollbar"),
   ],
-};
-export default config;
+} satisfies Config;

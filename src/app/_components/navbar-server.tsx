@@ -1,4 +1,4 @@
-import NavbarClient from "@/components/navbar-client";
+import NavbarClient from "~/app/_components/navbar-client";
 
 export default function NavbarServer() {
   /* const session = {
