@@ -34,7 +34,6 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
 
   return (
     <Card
-      isPressable
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
       onPress={() =>

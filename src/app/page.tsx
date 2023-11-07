@@ -87,6 +87,7 @@ export default async function Home() {
           height={1080}
           removeWrapper
           radius="none"
+          priority
           className="h-[90vh] w-full object-cover object-center"
         />
 

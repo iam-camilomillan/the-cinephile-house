@@ -30,8 +30,7 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
     orderBy: "popularity.desc",
   });
 
-  const movies = api.tmdb.getFilter.useQuery({
-    type: "movie",
+  const movies = api.tmdb.discoverMovies.useQuery({
     page,
     ...filterOptions,
   });
