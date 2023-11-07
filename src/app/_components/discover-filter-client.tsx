@@ -40,7 +40,7 @@ interface FilterOptions {
   orderBy: string;
 }
 
-export default function MoviesFilterClient({
+export default function DiscoverFilterClient({
   setFilterOptions,
   genresList,
 }: {

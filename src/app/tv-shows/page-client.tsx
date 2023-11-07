@@ -30,8 +30,7 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
     orderBy: "popularity.desc",
   });
 
-  const movies = api.tmdb.getFilter.useQuery({
-    type: "movie",
+  const tvShows = api.tmdb.discoverTVShows.useQuery({
     page,
     ...filterOptions,
   });
@@ -50,9 +49,9 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
 
       <section className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 gap-4 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {movies.data?.results ? (
-            movies.data.results.map((movie) => (
-              <CardClient key={movie.id} data={movie} />
+          {tvShows.data?.results ? (
+            tvShows.data.results.map((tvShow) => (
+              <CardClient key={tvShow.id} data={tvShow} />
             ))
           ) : (
             <div className="col-span-full flex h-64 items-center justify-center rounded-lg bg-neutral-900">
@@ -67,7 +66,7 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
         <Pagination
           isCompact
           showControls
-          total={movies.data?.total_pages ?? 1}
+          total={tvShows.data?.total_pages ?? 1}
           initialPage={1}
           onChange={setPage}
           classNames={{

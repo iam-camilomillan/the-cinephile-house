@@ -42,10 +42,9 @@ export const tmdbRouter = createTRPCRouter({
       return data.results;
     }),
 
-  getFilter: publicProcedure
+  discoverMovies: publicProcedure
     .input(
       z.object({
-        type: z.enum(["movie", "tv"]),
         page: z.number(),
         genres: z.array(z.string()),
         ratingFrom: z.number(),
@@ -54,19 +53,43 @@ export const tmdbRouter = createTRPCRouter({
         voteCountTo: z.number(),
         releaseDateFrom: z.number(),
         releaseDateTo: z.number(),
+        orderBy: z.string(),
       }),
     )
     .query(async ({ input }) => {
       const genresFormatted = input.genres.join("%2C");
 
       const request = await fetch(
-        `${baseURL}/discover/${input.type}?api_key=${env.TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=${input.page}&primary_release_date.gte=${input.releaseDateFrom}&primary_release_date.lte=${input.releaseDateTo}&vote_average.gte=${input.ratingFrom}&vote_average.lte=${input.ratingTo}&vote_count.gte=${input.voteCountFrom}&vote_count.lte=${input.voteCountTo}&with_genres=${genresFormatted}&sort_by=popularity.desc`,
+        `${baseURL}/discover/movie?api_key=${env.TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=${input.page}&primary_release_date.gte=${input.releaseDateFrom}&primary_release_date.lte=${input.releaseDateTo}&vote_average.gte=${input.ratingFrom}&vote_average.lte=${input.ratingTo}&vote_count.gte=${input.voteCountFrom}&vote_count.lte=${input.voteCountTo}&with_genres=${genresFormatted}&sort_by=${input.orderBy}`,
       );
 
-      const data =
-        input.type === "movie"
-          ? ((await request.json()) as TMDBMovieRequest)
-          : ((await request.json()) as TMDBTVShowRequest);
+      const data = (await request.json()) as TMDBMovieRequest;
+
+      return data;
+    }),
+
+  discoverTVShows: publicProcedure
+    .input(
+      z.object({
+        page: z.number(),
+        genres: z.array(z.string()),
+        ratingFrom: z.number(),
+        ratingTo: z.number(),
+        voteCountFrom: z.number(),
+        voteCountTo: z.number(),
+        releaseDateFrom: z.number(),
+        releaseDateTo: z.number(),
+        orderBy: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const genresFormatted = input.genres.join("%2C");
+
+      const request = await fetch(
+        `${baseURL}/discover/tv?api_key=${env.TMDB_API_KEY}&include_adult=false&include_video=false&language=en-US&page=${input.page}&first_air_date.gte=${input.releaseDateFrom}&first_air_date.lte=${input.releaseDateTo}&vote_average.gte=${input.ratingFrom}&vote_average.lte=${input.ratingTo}&vote_count.gte=${input.voteCountFrom}&vote_count.lte=${input.voteCountTo}&with_genres=${genresFormatted}&sort_by=${input.orderBy}`,
+      );
+
+      const data = (await request.json()) as TMDBTVShowRequest;
 
       return data;
     }),
