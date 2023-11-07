@@ -81,13 +81,16 @@ export default function MoviesFilterClient({
   };
 
   return (
-    <Accordion isCompact fullWidth variant="splitted">
+    <Accordion isCompact fullWidth className="px-0">
       <AccordionItem
         aria-label="Filters"
         title="Filters"
         startContent={<IconFilter />}
-        classNames={{ title: "font-bold", content: "overflow-hidden" }}
-        className="pb-2"
+        classNames={{
+          title: "font-bold ",
+          content: "overflow-hidden p-2",
+        }}
+        className="rounded-lg bg-neutral-900 p-2"
       >
         {/* Select for genres */}
         <CheckboxGroup

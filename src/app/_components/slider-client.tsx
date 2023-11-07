@@ -52,7 +52,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute left-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } hover:bg-secondary -translate-x-1/2`}
+        } -translate-x-1/2 hover:bg-secondary`}
       >
         <IconChevronLeft />
       </Button>
@@ -60,7 +60,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
       {/* Cards container */}
       <div
         ref={sliderRef}
-        className="scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600 flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2"
+        className="flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2 scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600"
       >
         {data.map((item, index) => (
           <CardClient key={index} data={item} />
@@ -75,7 +75,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         isIconOnly
         className={`absolute right-0 z-20 ${
           showControls ? "flex" : "hidden"
-        } hover:bg-secondary translate-x-1/2`}
+        } translate-x-1/2 hover:bg-secondary`}
       >
         <IconChevronRight />
       </Button>

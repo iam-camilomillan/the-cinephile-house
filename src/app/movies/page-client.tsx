@@ -4,7 +4,7 @@
 import { useState } from "react";
 
 /* NextUI imports */
-import { Pagination } from "@nextui-org/react";
+import { Pagination, Spinner } from "@nextui-org/react";
 
 /* Components imports */
 import MoviesFilterClient from "../_components/movies-filter-client";
@@ -49,11 +49,15 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
 
       <section className="mx-auto max-w-7xl px-6">
         <div className="grid grid-cols-2 gap-4 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {movies.data?.results
-            ? movies.data.results.map((movie) => (
-                <CardClient key={movie.id} data={movie} />
-              ))
-            : "Loading..."}
+          {movies.data?.results ? (
+            movies.data.results.map((movie) => (
+              <CardClient key={movie.id} data={movie} />
+            ))
+          ) : (
+            <div className="col-span-full flex h-64 items-center justify-center rounded-lg bg-neutral-900">
+              <Spinner color="primary" size="lg" />
+            </div>
+          )}
         </div>
 
         {/* Separator */}
