@@ -91,6 +91,24 @@ export default function DiscoverFilterClient({
     });
   };
 
+  const handleRating = (values: number | number[]) => {
+    if (typeof values !== "number") {
+      setRating(values);
+    }
+  };
+
+  const handleVotes = (values: number | number[]) => {
+    if (typeof values !== "number") {
+      setVotes(values);
+    }
+  };
+
+  const handleYears = (values: number | number[]) => {
+    if (typeof values !== "number") {
+      setYear(values);
+    }
+  };
+
   return (
     <Accordion isCompact fullWidth className="px-0">
       <AccordionItem
@@ -109,7 +127,7 @@ export default function DiscoverFilterClient({
           label="Select genre:"
           orientation="horizontal"
           value={genres}
-          onChange={setGenres}
+          onValueChange={setGenres}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         >
           {genresList.map((genre) => (
@@ -129,7 +147,7 @@ export default function DiscoverFilterClient({
           step={0.1}
           showTooltip
           value={rating}
-          onChange={setRating}
+          onChangeEnd={(value) => handleRating(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
@@ -144,7 +162,7 @@ export default function DiscoverFilterClient({
           step={100}
           showTooltip
           value={votes}
-          onChange={setVotes}
+          onChangeEnd={(value) => handleVotes(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
@@ -158,7 +176,7 @@ export default function DiscoverFilterClient({
           maxValue={2024}
           showTooltip
           value={year}
-          onChange={setYear}
+          onChangeEnd={(value) => handleYears(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
