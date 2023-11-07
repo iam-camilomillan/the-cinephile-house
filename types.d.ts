@@ -12,6 +12,10 @@ export interface TMDBTVShowRequest {
   total_results: number;
 }
 
+export interface TMDBGenresRequest {
+  genres: Genre[];
+}
+
 /* ------------------------ Movies types ------------------------ */
 export interface Movie {
   adult: boolean;

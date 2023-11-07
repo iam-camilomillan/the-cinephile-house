@@ -40,7 +40,7 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
       onPress={() =>
         router.push(`/${"title" in data ? "movies" : "tv-shows"}/${data.id}`)
       }
-      className="w-32 flex-shrink-0 bg-neutral-900 hover:scale-105 xs:w-40"
+      className="w-32 flex-shrink-0 bg-neutral-900 hover:scale-105 sm:w-40"
     >
       {/* Card options */}
       <CardHeader

@@ -88,8 +88,15 @@ export default function NavbarClient({ session }: { session: Session | null }) {
 
         {/* Movies link */}
         <NavbarItem>
-          <Link href="/explore" color="foreground">
-            Explore
+          <Link href="/movies" color="foreground">
+            Movies
+          </Link>
+        </NavbarItem>
+
+        {/* TV Shows link */}
+        <NavbarItem>
+          <Link href="/tv-shows" color="foreground">
+            TV Shows
           </Link>
         </NavbarItem>
       </NavbarContent>
@@ -207,18 +214,6 @@ export default function NavbarClient({ session }: { session: Session | null }) {
             size="lg"
           >
             TV Shows
-          </Link>
-        </NavbarMenuItem>
-
-        {/* Top Rated link */}
-        <NavbarMenuItem>
-          <Link
-            href="/top-rated"
-            className="w-full"
-            color="foreground"
-            size="lg"
-          >
-            Top Rated
           </Link>
         </NavbarMenuItem>
 
