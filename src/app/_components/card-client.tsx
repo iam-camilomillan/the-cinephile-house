@@ -1,5 +1,8 @@
 "use client";
 
+/* React imports */
+import { useState } from "react";
+
 /* Next imports */
 import NextImage from "next/image";
 import { useRouter } from "next/navigation";
@@ -7,7 +10,6 @@ import { useRouter } from "next/navigation";
 /* NextUI imports */
 import {
   Button,
-  ButtonGroup,
   Card,
   CardBody,
   CardFooter,
@@ -15,10 +17,14 @@ import {
   Image,
 } from "@nextui-org/react";
 
+/* Components imports */
+import AddToButtonsClient from "./add-to-buttons-client";
+
+/* Icons imports */
+import { IconStarFilled } from "@tabler/icons-react";
+
 /* Types imports */
 import { type Movie, type TVShow } from "types";
-import { IconBookmark, IconClock, IconHeart } from "@tabler/icons-react";
-import { useState } from "react";
 
 export default function CardClient({ data }: { data: Movie | TVShow }) {
   /* Hovering on card state */
@@ -26,11 +32,6 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
 
   /* Router definition */
   const router = useRouter();
-
-  /* Handle add to */
-  const handleAddTo = (listId: string) => {
-    console.log(listId);
-  };
 
   return (
     <Card
@@ -43,41 +44,25 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
     >
       {/* Card options */}
       <CardHeader
-        className={`absolute top-0 z-20 flex justify-end ${
+        className={`absolute top-0 z-20 flex justify-between ${
           isHovering ? "opacity-100" : "opacity-0"
         } transition-opacity duration-200 ease-in-out`}
       >
-        <ButtonGroup color="primary" size="sm">
-          {/* Favorites button */}
-          <Button
-            onPress={() => handleAddTo("001")}
-            isIconOnly
-            aria-label="Add to favorites"
-            className="hover:bg-secondary"
-          >
-            <IconHeart />
-          </Button>
+        {/* Rating*/}
+        <Button
+          aria-label="Rating"
+          size="sm"
+          color="primary"
+          startContent={<IconStarFilled size={20} />}
+          className="hover:bg-secondary hover:opacity-100"
+        >
+          <span className="text-base font-bold">
+            {data.vote_average.toPrecision(2)}
+          </span>
+        </Button>
 
-          {/* Watch later button */}
-          <Button
-            onPress={() => handleAddTo("002")}
-            isIconOnly
-            aria-label="Add to watch later"
-            className="hover:bg-secondary"
-          >
-            <IconClock />
-          </Button>
-
-          {/* Bookmark button */}
-          <Button
-            onPress={() => handleAddTo("003")}
-            isIconOnly
-            aria-label="Add to bookmarks"
-            className="hover:bg-secondary"
-          >
-            <IconBookmark />
-          </Button>
-        </ButtonGroup>
+        {/* Add to list dropdown */}
+        <AddToButtonsClient itemId={data.id} />
       </CardHeader>
 
       {/* Card image */}

@@ -1,14 +1,10 @@
 import NavbarClient from "~/app/_components/navbar-client";
 
-export default function NavbarServer() {
-  /* const session = {
-    user: {
-      id: "123244534",
-      name: "Camilo Millan",
-      avatar: "",
-    },
-  }; */
-  const session = null;
+/* Auth imports */
+import { getServerAuthSession } from "~/server/auth";
+
+export default async function NavbarServer() {
+  const session = await getServerAuthSession();
 
   return <NavbarClient session={session} />;
 }

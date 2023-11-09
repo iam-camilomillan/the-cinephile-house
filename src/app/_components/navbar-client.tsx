@@ -3,6 +3,9 @@
 /* React imports */
 import { useState } from "react";
 
+/* NextAuth imports */
+import { signOut } from "next-auth/react";
+
 /* NextUI imports */
 import {
   Navbar,
@@ -25,14 +28,8 @@ import {
 /* Icons imports */
 import { IconMovie, IconSearch } from "@tabler/icons-react";
 
-/* Temporary Session type */
-type Session = {
-  user: {
-    id: string;
-    name: string;
-    avatar: string;
-  };
-};
+/* Types imports */
+import type { Session } from "next-auth";
 
 export default function NavbarClient({ session }: { session: Session | null }) {
   /* Mobile menu state */
@@ -42,8 +39,8 @@ export default function NavbarClient({ session }: { session: Session | null }) {
   const [searchInputValue, setSearchInputValue] = useState("");
 
   /* Handle log out  */
-  const handleLogOut = () => {
-    console.log("Logged out");
+  const handleLogOut = async () => {
+    await signOut();
   };
 
   return (
@@ -116,15 +113,15 @@ export default function NavbarClient({ session }: { session: Session | null }) {
           className="hidden md:flex"
         />
 
-        {session ? (
+        {session?.user ? (
           <Dropdown
             placement="bottom-end"
-            classNames={{ base: "bg-neutral-900" }}
+            classNames={{ content: "bg-neutral-900" }}
           >
             <DropdownTrigger>
               <Avatar
                 as="button"
-                src={session.user.avatar}
+                src={session.user.image ?? ""}
                 color="primary"
                 size="sm"
                 isBordered

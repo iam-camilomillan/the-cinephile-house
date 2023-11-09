@@ -5,6 +5,9 @@ import { useState } from "react";
 /* Next imports */
 import NextImage from "next/image";
 
+/* NextAuth imports */
+import { signIn } from "next-auth/react";
+
 /* NextUI imports */
 import { Button, Image, Input, Link } from "@nextui-org/react";
 
@@ -31,8 +34,13 @@ export default function Page() {
     e.preventDefault();
   };
 
-  const handleGoogleLogIn = (e: FormEvent) => {
-    e.preventDefault();
+  /* Handles Google log in */
+  const handleGoogleLogIn = async () => {
+    try {
+      await signIn("google", { callbackUrl: "http://localhost:3000/" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -46,7 +54,7 @@ export default function Page() {
           width={1920}
           height={1080}
           priority
-          className="h-[90vh] w-full object-cover object-center"
+          className="h-[90vh] w-full rounded-none object-cover object-center"
         />
 
         {/* Content container */}
@@ -130,7 +138,7 @@ export default function Page() {
             {/* Log in with google button */}
             <Button
               type="button"
-              onClick={handleGoogleLogIn}
+              onPress={handleGoogleLogIn}
               startContent={<IconBrandGoogle />}
               fullWidth
               className="bg-white text-black hover:bg-white/90"

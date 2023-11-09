@@ -147,7 +147,7 @@ export default function DiscoverFilterClient({
           step={0.1}
           showTooltip
           value={rating}
-          onChangeEnd={(value) => handleRating(value)}
+          onChange={(value) => handleRating(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
@@ -162,7 +162,7 @@ export default function DiscoverFilterClient({
           step={100}
           showTooltip
           value={votes}
-          onChangeEnd={(value) => handleVotes(value)}
+          onChange={(value) => handleVotes(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
@@ -176,7 +176,7 @@ export default function DiscoverFilterClient({
           maxValue={2024}
           showTooltip
           value={year}
-          onChangeEnd={(value) => handleYears(value)}
+          onChange={(value) => handleYears(value)}
           classNames={{ label: "text-sm font-bold text-neutral-300" }}
         />
 
