@@ -62,7 +62,10 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
         </Button>
 
         {/* Add to list dropdown */}
-        <AddToButtonsClient itemId={data.id} />
+        <AddToButtonsClient
+          itemId={data.id}
+          type={"title" in data ? "movie" : "tv"}
+        />
       </CardHeader>
 
       {/* Card image */}

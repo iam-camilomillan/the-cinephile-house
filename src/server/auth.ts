@@ -8,21 +8,12 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 /* NextAuth providers imports */
 import GoogleProvider from "next-auth/providers/google";
-import CredentialsProvider from "next-auth/providers/credentials";
 
 /* Database imports */
 import { db } from "~/server/db";
 
-/* Bcrypt imports */
-import bcrypt from "bcrypt";
-
 /* Env variables imports */
 import { env } from "~/env.mjs";
-
-interface Credentials {
-  email: string;
-  password: string;
-}
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -65,44 +56,6 @@ export const authOptions: NextAuthOptions = {
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-    CredentialsProvider({
-      name: "credentials",
-      type: "credentials",
-      credentials: {
-        email: {},
-        password: {},
-      },
-      async authorize(credentials) {
-        const { email, password } = credentials as Credentials;
-
-        if (email.length < 1) {
-          throw new Error("Email shouldn't be empty.");
-        }
-
-        if (password.length < 6) {
-          throw new Error("Password should be at least 6 characters long.");
-        }
-
-        const user = await db.user.findUnique({ where: { email } });
-
-        if (!user) {
-          throw new Error("User doesn't exist.");
-        }
-
-        if (user.hashedPassword) {
-          const passwordsMatch = await bcrypt.compare(
-            password,
-            user.hashedPassword,
-          );
-
-          if (!passwordsMatch) {
-            throw new Error("Passwords doesn't match.");
-          }
-        }
-
-        return user;
-      },
     }),
   ],
 };

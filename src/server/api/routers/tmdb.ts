@@ -8,10 +8,15 @@ import { env } from "~/env.mjs";
 
 /* Types imports */
 import type {
+  Movie,
+  SearchRequest,
   TMDBGenresRequest,
   TMDBMovieRequest,
+  TMDBSearchRequest,
   TMDBTVShowRequest,
+  TVShow,
 } from "types";
+import { Item } from "@prisma/client";
 
 /* TMDB base url */
 const baseURL = "https://api.themoviedb.org/3";
@@ -88,6 +93,22 @@ export const tmdbRouter = createTRPCRouter({
       const data = (await request.json()) as TMDBTVShowRequest;
 
       return data;
+    }),
+
+  search: publicProcedure
+    .input(
+      z.object({
+        query: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const request = await fetch(
+        `${baseURL}/search/multi?api_key=${env.TMDB_API_KEY}&query=${input.query}&include_adult=false&language=en-US&page=1/search/multi?include_adult=false&language=en-US&page=1`,
+      );
+
+      const data = (await request.json()) as SearchRequest;
+
+      return data.results;
     }),
 
   getGenres: publicProcedure

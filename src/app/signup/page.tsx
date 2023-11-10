@@ -24,9 +24,12 @@ import { type FormEvent } from "react";
 
 export default function Page() {
   /* Sign up states */
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   /* Utils states */
   const [isPasswordVisible, setPasswordIsVisible] = useState(false);
@@ -35,12 +38,14 @@ export default function Page() {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+
+    console.log("Not implemented.");
   };
 
   /* Handles Google log in */
   const handleGoogleLogIn = async () => {
     try {
-      await signIn("google", { callbackUrl: "http://localhost:3000/" });
+      await signIn("google", { redirect: false });
     } catch (error) {
       console.log(error);
     }
@@ -76,14 +81,40 @@ export default function Page() {
             onSubmit={handleSubmit}
             className="flex w-full max-w-xs flex-col items-start rounded-xl border border-neutral-900 bg-neutral-950 p-4"
           >
+            {/* Name input */}
+            <Input
+              type="text"
+              label="Name"
+              labelPlacement="outside"
+              placeholder=""
+              value={data.name}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  name: value,
+                }))
+              }
+              classNames={{
+                inputWrapper: "bg-neutral-900",
+              }}
+            />
+
+            {/* Separator */}
+            <div className="h-2" />
+
             {/* Email input */}
             <Input
               type="email"
               label="Email"
               labelPlacement="outside"
               placeholder=""
-              value={email}
-              onValueChange={setEmail}
+              value={data.email}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  email: value,
+                }))
+              }
               classNames={{
                 inputWrapper: "bg-neutral-900",
               }}
@@ -111,8 +142,13 @@ export default function Page() {
                   )}
                 </button>
               }
-              value={password}
-              onValueChange={setPassword}
+              value={data.password}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  password: value,
+                }))
+              }
               classNames={{
                 inputWrapper: "bg-neutral-900",
               }}
@@ -142,8 +178,13 @@ export default function Page() {
                   )}
                 </button>
               }
-              value={confirmPassword}
-              onValueChange={setConfirmPassword}
+              value={data.confirmPassword}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  confirmPassword: value,
+                }))
+              }
               classNames={{
                 inputWrapper: "bg-neutral-900",
               }}

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 /* Next imports */
 import NextImage from "next/image";
+import { useRouter } from "next/navigation";
 
 /* NextAuth imports */
 import { signIn } from "next-auth/react";
@@ -24,23 +25,30 @@ import { type FormEvent } from "react";
 
 export default function Page() {
   /* Login states */
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({ email: "", password: "" });
 
   /* Utils states */
   const [isPasswordVisible, setPasswordIsVisible] = useState(false);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  /* Router declaration */
+  const router = useRouter();
+
+  /* Submit handler */
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    console.log("Not implemented");
   };
 
   /* Handles Google log in */
   const handleGoogleLogIn = async () => {
-    try {
-      await signIn("google", { callbackUrl: "http://localhost:3000/" });
-    } catch (error) {
-      console.log(error);
-    }
+    await signIn("google", { redirect: false })
+      .then((ok) => {
+        if (ok) {
+          router.refresh();
+        }
+      })
+      .then((error) => console.log(error));
   };
 
   return (
@@ -79,8 +87,13 @@ export default function Page() {
               label="Email"
               labelPlacement="outside"
               placeholder="demo@thecinephilehouse.com"
-              value={email}
-              onValueChange={setEmail}
+              value={data.email}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  email: value,
+                }))
+              }
               classNames={{
                 inputWrapper: "bg-neutral-900",
               }}
@@ -108,8 +121,13 @@ export default function Page() {
                   )}
                 </button>
               }
-              value={password}
-              onValueChange={setPassword}
+              value={data.password}
+              onValueChange={(value) =>
+                setData((previousState) => ({
+                  ...previousState,
+                  password: value,
+                }))
+              }
               classNames={{
                 inputWrapper: "bg-neutral-900",
               }}

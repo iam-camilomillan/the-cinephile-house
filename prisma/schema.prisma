@@ -11,6 +11,7 @@ datasource db {
 model Item {
     id           String   @id @default(cuid())
     tmdbId       String
+    type         String
     rating       Float    @default(0)
     watched      Boolean  @default(false)
     inFavorites  Boolean?

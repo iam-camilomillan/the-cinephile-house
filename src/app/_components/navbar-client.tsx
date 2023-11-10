@@ -22,21 +22,18 @@ import {
   Avatar,
   DropdownMenu,
   DropdownItem,
-  Input,
 } from "@nextui-org/react";
 
 /* Icons imports */
-import { IconMovie, IconSearch } from "@tabler/icons-react";
+import { IconMovie } from "@tabler/icons-react";
 
 /* Types imports */
 import type { Session } from "next-auth";
+import SearchBarClient from "./search-bar-client";
 
 export default function NavbarClient({ session }: { session: Session | null }) {
   /* Mobile menu state */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  /* Search state */
-  const [searchInputValue, setSearchInputValue] = useState("");
 
   /* Handle log out  */
   const handleLogOut = async () => {
@@ -100,18 +97,7 @@ export default function NavbarClient({ session }: { session: Session | null }) {
 
       {/* Navigation authorization links */}
       <NavbarContent as="div" justify="end">
-        <Input
-          isClearable
-          radius="lg"
-          placeholder="Search movies or TV shows"
-          startContent={<IconSearch />}
-          classNames={{
-            inputWrapper: "bg-neutral-900",
-          }}
-          value={searchInputValue}
-          onValueChange={setSearchInputValue}
-          className="hidden md:flex"
-        />
+        <SearchBarClient />
 
         {session?.user ? (
           <Dropdown

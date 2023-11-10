@@ -28,7 +28,13 @@ import {
 } from "@tabler/icons-react";
 import { IconTextPlus } from "@tabler/icons-react";
 
-export default function AddToButtonsClient({ itemId }: { itemId: number }) {
+export default function AddToButtonsClient({
+  itemId,
+  type,
+}: {
+  itemId: number;
+  type: "movie" | "tv";
+}) {
   /* States for inList */
   const [inFavorites, setInFavorites] = useState(false);
   const [inWatchLater, setInWatchLater] = useState(false);
@@ -58,15 +64,27 @@ export default function AddToButtonsClient({ itemId }: { itemId: number }) {
 
   const handleAddTo = (list: string) => {
     if (list === "001") {
-      addToFavorites.mutate({ tmdbId: itemId, inFavorites: !inFavorites });
+      addToFavorites.mutate({
+        tmdbId: itemId,
+        type,
+        inFavorites: !inFavorites,
+      });
     }
 
     if (list === "002") {
-      addToWatchLater.mutate({ tmdbId: itemId, inWatchLater: !inWatchLater });
+      addToWatchLater.mutate({
+        tmdbId: itemId,
+        type,
+        inWatchLater: !inWatchLater,
+      });
     }
 
     if (list === "003") {
-      addToBookmarks.mutate({ tmdbId: itemId, inBookmarks: !inBookmarks });
+      addToBookmarks.mutate({
+        tmdbId: itemId,
+        type,
+        inBookmarks: !inBookmarks,
+      });
     }
   };
 
