@@ -52,6 +52,24 @@ export interface SearchRequestResult {
   origin_country?: string[];
 }
 
+export interface VideosRequest {
+  id: number;
+  results: VideosRequestResult[];
+}
+
+export interface VideosRequestResult {
+  iso_639_1: string;
+  iso_3166_1: string;
+  name: string;
+  key: string;
+  site: string;
+  size: number;
+  type: string;
+  official: boolean;
+  published_at: string;
+  id: string;
+}
+
 /* ------------------------ Movies types ------------------------ */
 export interface Movie {
   adult: boolean;

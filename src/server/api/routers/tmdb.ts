@@ -15,6 +15,7 @@ import type {
   TMDBSearchRequest,
   TMDBTVShowRequest,
   TVShow,
+  VideosRequest,
 } from "types";
 import { Item } from "@prisma/client";
 
@@ -109,6 +110,46 @@ export const tmdbRouter = createTRPCRouter({
       const data = (await request.json()) as SearchRequest;
 
       return data.results;
+    }),
+
+  getVideos: publicProcedure
+    .input(
+      z.object({
+        type: z.enum(["movie", "tv"]),
+        itemId: z.number(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const request = await fetch(
+        `${baseURL}/${input.type}/${input.itemId}/videos?api_key=${env.TMDB_API_KEY}&language=en-US`,
+      );
+
+      const data = (await request.json()) as VideosRequest;
+
+      return data.results;
+    }),
+
+  getTrailer: publicProcedure
+    .input(
+      z.object({
+        type: z.enum(["movie", "tv"]),
+        itemId: z.number(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const request = await fetch(
+        `${baseURL}/${input.type}/${input.itemId}/videos?api_key=${env.TMDB_API_KEY}&language=en-US`,
+      );
+
+      const data = (await request.json()) as VideosRequest;
+
+      const movieTrailers = data.results.filter(
+        (video) => video.site === "YouTube" && video.type === "Trailer",
+      );
+
+      const trailer = movieTrailers[0];
+
+      return trailer;
     }),
 
   getGenres: publicProcedure

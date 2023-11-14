@@ -14,10 +14,6 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        primary: "#dc2626",
-        secondary: "#ef4444",
-      },
       screens: {
         xs: "480px",
       },
@@ -30,6 +26,21 @@ export default {
   plugins: [
     nextui({
       addCommonColors: true,
+      themes: {
+        dark: {
+          colors: {
+            background: "#0a0a0a",
+            foreground: "#fafafa",
+            divider: "#fafafa",
+            overlay: "#0a0a0a",
+            focus: "#dc2626",
+            primary: {
+              DEFAULT: "#ef4444",
+              foreground: "#fafafa",
+            },
+          },
+        },
+      },
     }),
     require("tailwind-scrollbar"),
   ],

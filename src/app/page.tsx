@@ -3,7 +3,7 @@ import NextImage from "next/image";
 import NextLink from "next/link";
 
 /* Components imports */
-import PlayTrailerButtonClient from "~/app/_components/play-trailer-button-client";
+import PlayTrailerButtonServer from "./_components/play-trailer-button-server";
 import ContentModule from "~/app/_components/content-module";
 
 /* NextUI imports */
@@ -11,8 +11,6 @@ import { Image, Link, ScrollShadow } from "@nextui-org/react";
 
 /* Utils imports */
 import { getRandomNumber } from "~/utils/getRandomNumber";
-
-import { getServerAuthSession } from "~/server/auth";
 
 /* API imports */
 import { api } from "~/trpc/server";
@@ -118,7 +116,7 @@ export default async function Home() {
             {/* Content buttons */}
             <div className="flex items-center gap-x-4">
               {/* Play trailer button */}
-              <PlayTrailerButtonClient link="" />
+              <PlayTrailerButtonServer itemId={movie.id} />
 
               {/* Providers link button */}
               <Link
@@ -199,22 +197,3 @@ export default async function Home() {
     </main>
   );
 }
-
-/* async function CrudShowcase() {
-  const session = await getServerAuthSession();
-  if (!session?.user) return null;
-
-  const latestPost = await api.post.getLatest.query();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
-  );
-} */
