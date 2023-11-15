@@ -25,7 +25,6 @@ export default {
   darkMode: "class",
   plugins: [
     nextui({
-      addCommonColors: true,
       themes: {
         dark: {
           colors: {

@@ -1,3 +1,4 @@
+/* Components imports */
 import NavbarClient from "~/app/_components/navbar-client";
 
 /* Auth imports */

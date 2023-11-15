@@ -104,14 +104,12 @@ export default function AddToButtonsClient({
   }, [item.data]);
 
   return (
-    <Dropdown classNames={{ content: "bg-primary text-neutral-50" }}>
+    <Dropdown
+      closeOnSelect={false}
+      classNames={{ content: "bg-primary text-neutral-50" }}
+    >
       <DropdownTrigger>
-        <Button
-          size="sm"
-          color="primary"
-          isIconOnly
-          className="hover:bg-secondary hover:opacity-100"
-        >
+        <Button size="sm" color="primary" isIconOnly>
           <IconTextPlus />
         </Button>
       </DropdownTrigger>
@@ -131,6 +129,7 @@ export default function AddToButtonsClient({
               <IconHeart />
             )
           }
+          classNames={{ base: "hover:bg-red-900" }}
         >
           Add to Favorites
         </DropdownItem>
