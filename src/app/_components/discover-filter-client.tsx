@@ -40,6 +40,8 @@ interface FilterOptions {
   orderBy: string;
 }
 
+/* UNCHECKED */
+
 export default function DiscoverFilterClient({
   setFilterOptions,
   genresList,

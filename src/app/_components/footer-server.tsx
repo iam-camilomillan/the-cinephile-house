@@ -1,9 +1,10 @@
+/* NextUI imports */
 import { Link } from "@nextui-org/react";
 
 export default function FooterServer() {
   return (
     <footer>
-      <p className="mx-auto max-w-7xl border-t border-neutral-900 px-8 py-6 text-center">
+      <p className="mx-auto max-w-7xl border-t border-neutral-800 px-8 py-6 text-center">
         <span className="opacity-90">Built by </span>
         <Link
           href="https://iamcamilomillan.vercel.app/"

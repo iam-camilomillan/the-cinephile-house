@@ -6,21 +6,18 @@ import { useState } from "react";
 /* NextUI imports */
 import { Tab, Tabs } from "@nextui-org/react";
 
-/* Types imports */
-import { type Movie, type TVShow } from "types";
-import SliderClient from "./slider-client";
-import { type Key } from "react";
+/* Components imports */
+import SliderClient from "~/app/_components/slider-client";
 
-interface Option {
-  key: string;
-  title: string;
-}
+/* Types imports */
+import { type Key } from "react";
+import { type DiscoverMovieResult, type DiscoverTVShowResult } from "types";
 
 interface Props {
   title: string;
-  options: Option[];
-  dataOne: Movie[] | TVShow[];
-  dataTwo: Movie[] | TVShow[] | null;
+  options: Key[];
+  dataOne: DiscoverMovieResult[] | DiscoverTVShowResult[];
+  dataTwo: DiscoverMovieResult[] | DiscoverTVShowResult[] | null;
 }
 
 export default function ContentModule({
@@ -29,9 +26,7 @@ export default function ContentModule({
   dataOne,
   dataTwo,
 }: Props) {
-  const [currentOption, setCurrentOption] = useState<Key | null>(
-    options[0]?.key ?? null,
-  );
+  const [selected, setSelected] = useState<Key | null>(options[0] ?? null);
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -42,15 +37,14 @@ export default function ContentModule({
 
         {/* Options */}
         <Tabs
-          selectedKey={currentOption}
-          onSelectionChange={setCurrentOption}
+          selectedKey={selected?.toString()}
+          onSelectionChange={setSelected}
           aria-label="Options"
           color="primary"
           radius="full"
-          classNames={{ tabList: "bg-neutral-900" }}
         >
           {options.map((option) => (
-            <Tab key={option.key} title={option.title} />
+            <Tab key={option} title={option.toString()} />
           ))}
         </Tabs>
       </div>
@@ -59,7 +53,7 @@ export default function ContentModule({
       <div className="h-2" />
 
       {/* Slider */}
-      {currentOption === "one" ? (
+      {selected === options[0] ? (
         <SliderClient data={dataOne} />
       ) : dataTwo ? (
         <SliderClient data={dataTwo} />

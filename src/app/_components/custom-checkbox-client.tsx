@@ -5,6 +5,8 @@ import { IconCheck } from "@tabler/icons-react";
 /* Types imports */
 import type { CheckboxProps } from "@nextui-org/react";
 
+/* UNCHECKED */
+
 const checkbox = tv({
   slots: {
     base: "border-default hover:bg-default-200",

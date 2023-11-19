@@ -1,15 +1,13 @@
-/* TRPC Api imports */
+/* Api router imports */
 import { createTRPCRouter } from "~/server/api/trpc";
 
 /* Routers imports */
 import { tmdbRouter } from "~/server/api/routers/tmdb";
-import { itemRouter } from "~/server/api/routers/item";
-import { userRouter } from "~/server/api/routers/user";
+import { dataRouter } from "~/server/api/routers/data";
 
 export const appRouter = createTRPCRouter({
   tmdb: tmdbRouter,
-  item: itemRouter,
-  user: userRouter,
+  data: dataRouter,
 });
 
 // export type definition of API

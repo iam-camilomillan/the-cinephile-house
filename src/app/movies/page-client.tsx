@@ -35,6 +35,8 @@ export default function PageClient({ genresList }: { genresList: Genre[] }) {
     ...filterOptions,
   });
 
+  /* UNCHECKED */
+
   return (
     <main className="py-8">
       <section className="mx-auto max-w-7xl px-6">

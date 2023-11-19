@@ -3,215 +3,33 @@
 /* React imports */
 import { useState } from "react";
 
-/* NextAuth imports */
-import { signOut } from "next-auth/react";
-
 /* NextUI imports */
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarMenuToggle,
-  NavbarMenuItem,
-  NavbarMenu,
-  NavbarContent,
-  NavbarItem,
-  Link,
-  Button,
-  Dropdown,
-  DropdownTrigger,
-  Avatar,
-  DropdownMenu,
-  DropdownItem,
-} from "@nextui-org/react";
+import { Navbar } from "@nextui-org/react";
 
-/* Icons imports */
-import { IconMovie } from "@tabler/icons-react";
+/* Components imports */
+import NavbarMobileClient from "~/app/_components/navbar-mobile-client";
+import NavbarDesktopClient from "~/app/_components/navbar-desktop-client";
 
 /* Types imports */
 import type { Session } from "next-auth";
-import SearchBarClient from "./search-bar-client";
 
 export default function NavbarClient({ session }: { session: Session | null }) {
   /* Mobile menu state */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  /* Handle log out  */
-  const handleLogOut = async () => {
-    await signOut();
-  };
-
   return (
     <Navbar
-      isBordered
-      shouldHideOnScroll
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      shouldHideOnScroll
+      isBordered
       maxWidth="xl"
     >
-      <NavbarContent className="sm:hidden" justify="start">
-        {/* Mobile menu toggler */}
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        />
-
-        {/* Navbar brand */}
-        <NavbarBrand>
-          <Link href="/" className="hover:opacity-100" color="foreground">
-            <IconMovie className="-rotate-45 text-primary" />
-            <span className="font-bold">TheCinephileHouse</span>
-          </Link>
-        </NavbarBrand>
-      </NavbarContent>
+      {/* Mobile */}
+      <NavbarMobileClient isMenuOpen existSession={session ? true : false} />
 
       {/* Desktop */}
-      <NavbarContent className="hidden gap-4 sm:flex" justify="center">
-        {/* Navbar brand */}
-        <NavbarBrand>
-          <Link href="/" className="hover:opacity-100" color="foreground">
-            <IconMovie className="-rotate-45 text-primary" />
-            <span className="font-bold">TheCinephileHouse</span>
-          </Link>
-        </NavbarBrand>
-
-        {/* Home link */}
-        <NavbarItem>
-          <Link href="/" color="foreground">
-            Home
-          </Link>
-        </NavbarItem>
-
-        {/* Movies link */}
-        <NavbarItem>
-          <Link href="/movies" color="foreground">
-            Movies
-          </Link>
-        </NavbarItem>
-
-        {/* TV Shows link */}
-        <NavbarItem>
-          <Link href="/tv-shows" color="foreground">
-            TV Shows
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-
-      {/* Navigation authorization links */}
-      <NavbarContent as="div" justify="end">
-        <SearchBarClient />
-
-        {session?.user ? (
-          <Dropdown
-            placement="bottom-end"
-            classNames={{ content: "bg-neutral-900" }}
-          >
-            <DropdownTrigger>
-              <Avatar
-                as="button"
-                src={session.user.image ?? ""}
-                color="primary"
-                size="sm"
-                isBordered
-                className="ring-primary transition-transform"
-              />
-            </DropdownTrigger>
-
-            <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="settings">
-                <Link
-                  href="/profile"
-                  className="h-full w-full"
-                  color="foreground"
-                >
-                  <span>Profile</span>
-                </Link>
-              </DropdownItem>
-
-              <DropdownItem key="team_settings">
-                <Link
-                  href="/profile/lists"
-                  className="h-full w-full"
-                  color="foreground"
-                >
-                  <span>Lists</span>
-                </Link>
-              </DropdownItem>
-
-              {/* Log out button */}
-              <DropdownItem key="logout" color="primary">
-                <button
-                  type="button"
-                  onClick={handleLogOut}
-                  className="h-full w-full text-start"
-                >
-                  <span>Log Out</span>
-                </button>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        ) : (
-          <>
-            {/* Login link */}
-            <NavbarItem className="hidden xs:flex sm:hidden md:flex">
-              <Link href="/login" color="foreground">
-                Login
-              </Link>
-            </NavbarItem>
-
-            {/* Sign up button link */}
-            <>
-              <Button
-                as={Link}
-                href="/signup"
-                color="primary"
-                className="font-bold hover:bg-secondary hover:opacity-100"
-              >
-                Sign Up
-              </Button>
-            </>
-          </>
-        )}
-      </NavbarContent>
-
-      {/* Mobile */}
-      <NavbarMenu>
-        {/* Home link */}
-        <NavbarMenuItem>
-          <Link href="/" className="w-full" color="foreground" size="lg">
-            Home
-          </Link>
-        </NavbarMenuItem>
-
-        {/* Movies link */}
-        <NavbarMenuItem>
-          <Link href="/movies" className="w-full" color="foreground" size="lg">
-            Movies
-          </Link>
-        </NavbarMenuItem>
-
-        {/* TV Shows link */}
-        <NavbarMenuItem>
-          <Link
-            href="/tv-shows"
-            className="w-full"
-            color="foreground"
-            size="lg"
-          >
-            TV Shows
-          </Link>
-        </NavbarMenuItem>
-
-        {/* Login link */}
-        <NavbarMenuItem>
-          <Link
-            href="/login"
-            className="w-full font-bold xs:hidden"
-            color="foreground"
-            size="lg"
-          >
-            Login
-          </Link>
-        </NavbarMenuItem>
-      </NavbarMenu>
+      <NavbarDesktopClient session={session} />
     </Navbar>
   );
 }

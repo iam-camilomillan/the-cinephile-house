@@ -1,12 +1,16 @@
+/* Next imports */
+import { cookies } from "next/headers";
+
+/* TRPC imports */
 import {
   createTRPCProxyClient,
   loggerLink,
   unstable_httpBatchStreamLink,
 } from "@trpc/client";
-import { headers } from "next/headers";
+import { getUrl, transformer } from "~/trpc/shared";
 
+/* Types imports */
 import { type AppRouter } from "~/server/api/root";
-import { getUrl, transformer } from "./shared";
 
 export const api = createTRPCProxyClient<AppRouter>({
   transformer,
@@ -19,9 +23,10 @@ export const api = createTRPCProxyClient<AppRouter>({
     unstable_httpBatchStreamLink({
       url: getUrl(),
       headers() {
-        const heads = new Map(headers());
-        heads.set("x-trpc-source", "rsc");
-        return Object.fromEntries(heads);
+        return {
+          cookie: cookies().toString(),
+          "x-trpc-source": "rsc",
+        };
       },
     }),
   ],

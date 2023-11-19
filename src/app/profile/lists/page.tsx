@@ -15,13 +15,16 @@ import { api } from "~/trpc/react";
 /* Types imports */
 import type { Key } from "react";
 
+/* UNCHECKED */
+
 export default function Page() {
   const [selectedTab, setSelectedTab] = useState<Key>("inFavorites");
   const [list, setList] = useState<
     "inFavorites" | "inWatchLater" | "inBookmarks"
   >("inFavorites");
 
-  const items = api.item.getItemsInList.useQuery({ list });
+  /* const items = api.data.getItem.useQuery({ list }); */
+  const items = [];
 
   useEffect(() => {
     if (selectedTab === "inFavorites") {

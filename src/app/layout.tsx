@@ -1,5 +1,5 @@
 /* Next imports */
-import { headers } from "next/headers";
+import { cookies } from "next/headers";
 
 /* TRPC imports */
 import { TRPCReactProvider } from "~/trpc/react";
@@ -7,6 +7,12 @@ import { TRPCReactProvider } from "~/trpc/react";
 /* Components imports */
 import NavbarServer from "~/app/_components/navbar-server";
 import FooterServer from "~/app/_components/footer-server";
+
+/* NextUI imports */
+import { NextUIProviderClient } from "~/app/providers";
+
+/* Styles imports */
+import "~/styles/globals.css";
 
 /* Font imports */
 import { Open_Sans } from "next/font/google";
@@ -16,12 +22,6 @@ const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-sans",
 });
-
-/* Styles imports */
-import "~/styles/globals.css";
-
-/* NextUI imports */
-import { NextUIProviderClient } from "./providers";
 
 /* Metadata declarations */
 export const metadata = {
@@ -36,9 +36,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark font-sans ${openSans.variable}`}>
+    <html lang="en" className={`font-sans ${openSans.variable}`}>
       <body>
-        <TRPCReactProvider headers={headers()}>
+        <TRPCReactProvider cookies={cookies().toString()}>
           <NextUIProviderClient>
             {/* Navbar */}
             <NavbarServer />

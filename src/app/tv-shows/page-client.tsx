@@ -16,6 +16,8 @@ import { api } from "~/trpc/react";
 /* Types imports */
 import type { Genre } from "types";
 
+/* UNCHECKED */
+
 export default function PageClient({ genresList }: { genresList: Genre[] }) {
   const [page, setPage] = useState(1);
 

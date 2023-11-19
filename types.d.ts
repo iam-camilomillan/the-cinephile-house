@@ -1,36 +1,38 @@
-export interface TMDBMovieRequest {
-  page: number;
-  results: Movie[];
-  total_pages: number;
-  total_results: number;
-}
-
-export interface TMDBTVShowRequest {
-  page: number;
-  results: TVShow[];
-  total_pages: number;
-  total_results: number;
-}
-
-export interface TMDBSearchRequest {
-  page: number;
-  results: (Movie | TVShow)[];
-  total_pages: number;
-  total_results: number;
-}
-
-export interface TMDBGenresRequest {
-  genres: Genre[];
-}
-
+/* Search by query request */
 export interface SearchRequest {
   page: number;
-  results: SearchRequestResult[];
+  results: SearchResult[];
   total_pages: number;
   total_results: number;
 }
 
-export interface SearchRequestResult {
+export interface SearchResult {
+  adult: boolean;
+  backdrop_path?: string;
+  id: number;
+  title?: string;
+  original_language?: string;
+  original_title?: string;
+  overview?: string;
+  poster_path?: string;
+  media_type: string;
+  genre_ids?: number[];
+  popularity: number;
+  release_date?: string;
+  video?: boolean;
+  vote_average?: number;
+  vote_count?: number;
+  name?: string;
+  original_name?: string;
+  first_air_date?: string;
+  origin_country?: string[];
+  gender?: number;
+  known_for_department?: string;
+  profile_path?: string;
+  known_for?: KnownFor[];
+}
+
+export interface KnownFor {
   adult: boolean;
   backdrop_path?: string;
   id: number;
@@ -52,12 +54,62 @@ export interface SearchRequestResult {
   origin_country?: string[];
 }
 
-export interface VideosRequest {
-  id: number;
-  results: VideosRequestResult[];
+/* Discover movie request */
+export interface DiscoverMovieRequest {
+  page: number;
+  results: DiscoverMovieResult[];
+  total_pages: number;
+  total_results: number;
 }
 
-export interface VideosRequestResult {
+export interface DiscoverMovieResult {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+/* Discover TV Shows request*/
+export interface DiscoverTVShowRequest {
+  page: number;
+  results: DiscoverTVShowResult[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface DiscoverTVShowResult {
+  backdrop_path: string;
+  first_air_date: string;
+  genre_ids: number[];
+  id: number;
+  name: string;
+  origin_country: string[];
+  original_language: string;
+  original_name: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  vote_average: number;
+  vote_count: number;
+}
+
+/* Videos request */
+export interface VideoRequest {
+  id: number;
+  results: VideoResult[];
+}
+
+export interface VideoResult {
   iso_639_1: string;
   iso_3166_1: string;
   name: string;
@@ -70,7 +122,7 @@ export interface VideosRequestResult {
   id: string;
 }
 
-/* ------------------------ Movies types ------------------------ */
+/* Movie types */
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
@@ -106,31 +158,7 @@ export interface BelongsToCollection {
   backdrop_path: string;
 }
 
-export interface Genre {
-  id: number;
-  name: string;
-}
-
-export interface ProductionCompany {
-  id: number;
-  logo_path: string;
-  name: string;
-  origin_country: string;
-}
-
-export interface ProductionCountry {
-  iso_3166_1: string;
-  name: string;
-}
-
-export interface SpokenLanguage {
-  english_name: string;
-  iso_639_1: string;
-  name: string;
-}
-
-/* ------------------------ TV Show types ------------------------ */
-
+/* TV Show types */
 export interface TVShow {
   adult: boolean;
   backdrop_path: string;
@@ -174,11 +202,6 @@ export interface CreatedBy {
   profile_path: string;
 }
 
-export interface Genre {
-  id: number;
-  name: string;
-}
-
 export interface LastEpisodeToAir {
   id: number;
   name: string;
@@ -218,6 +241,23 @@ export interface Network {
   origin_country: string;
 }
 
+export interface Season {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string;
+  season_number: number;
+  vote_average: number;
+}
+
+/* Complementary types */
+export interface Genre {
+  id: number;
+  name: string;
+}
+
 export interface ProductionCompany {
   id: number;
   logo_path?: string;
@@ -228,17 +268,6 @@ export interface ProductionCompany {
 export interface ProductionCountry {
   iso_3166_1: string;
   name: string;
-}
-
-export interface Season {
-  air_date: string;
-  episode_count: number;
-  id: number;
-  name: string;
-  overview: string;
-  poster_path: string;
-  season_number: number;
-  vote_average: number;
 }
 
 export interface SpokenLanguage {

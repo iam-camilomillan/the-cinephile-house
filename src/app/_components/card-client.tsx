@@ -1,5 +1,3 @@
-"use client";
-
 /* React imports */
 import { useState } from "react";
 
@@ -18,15 +16,19 @@ import {
 } from "@nextui-org/react";
 
 /* Components imports */
-import AddToButtonsClient from "./add-to-buttons-client";
+import AddToButtonsClient from "~/app/_components/add-to-buttons-client";
 
 /* Icons imports */
 import { IconStarFilled } from "@tabler/icons-react";
 
 /* Types imports */
-import { type Movie, type TVShow } from "types";
+import { type DiscoverMovieResult, type DiscoverTVShowResult } from "types";
 
-export default function CardClient({ data }: { data: Movie | TVShow }) {
+export default function CardClient({
+  data,
+}: {
+  data: DiscoverMovieResult | DiscoverTVShowResult;
+}) {
   /* Hovering on card state */
   const [isHovering, setIsHovering] = useState(false);
 
@@ -40,7 +42,7 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
       onPress={() =>
         router.push(`/${"title" in data ? "movies" : "tv-shows"}/${data.id}`)
       }
-      className="w-32 flex-shrink-0 bg-neutral-900 hover:scale-105 sm:w-40"
+      className="max-w-[128px] flex-shrink-0 bg-neutral-800 hover:scale-105 sm:max-w-[160px]"
     >
       {/* Card options */}
       <CardHeader
@@ -51,10 +53,10 @@ export default function CardClient({ data }: { data: Movie | TVShow }) {
         {/* Rating*/}
         <Button
           aria-label="Rating"
-          size="sm"
           color="primary"
+          size="sm"
           startContent={<IconStarFilled size={20} />}
-          className="hover:bg-secondary hover:opacity-100"
+          className="hover:bg-primary-200 hover:opacity-100"
         >
           <span className="text-base font-bold">
             {data.vote_average.toPrecision(2)}

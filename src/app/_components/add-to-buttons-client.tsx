@@ -1,21 +1,18 @@
-"use client";
-
 /* React imports */
 import { useEffect, useState } from "react";
+
+/* API imports */
+import { api } from "~/trpc/react";
 
 /* NextUI imports */
 import {
   Button,
-  ButtonGroup,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
   Spinner,
 } from "@nextui-org/react";
-
-/* API imports */
-import { api } from "~/trpc/react";
 
 /* Icons imports */
 import {
@@ -25,8 +22,8 @@ import {
   IconClockFilled,
   IconHeart,
   IconHeartFilled,
+  IconTextPlus,
 } from "@tabler/icons-react";
-import { IconTextPlus } from "@tabler/icons-react";
 
 export default function AddToButtonsClient({
   itemId,
@@ -36,70 +33,47 @@ export default function AddToButtonsClient({
   type: "movie" | "tv";
 }) {
   /* States for inList */
-  const [inFavorites, setInFavorites] = useState(false);
-  const [inWatchLater, setInWatchLater] = useState(false);
-  const [inBookmarks, setInBookmarks] = useState(false);
+  const [onLists, setOnLists] = useState<string[]>([]);
 
   /* Get item data from database */
-  const item = api.item.getItem.useQuery({ tmdbId: itemId });
+  const item = api.data.getItem.useQuery({ tmdbId: itemId });
 
-  /* Handle add to */
-  const addToFavorites = api.item.addToFavorites.useMutation({
+  /* Add to mutation */
+  const addToList = api.data.addToList.useMutation({
     onSuccess: (data) => {
-      setInFavorites(data.inFavorites ?? false);
+      setOnLists((prev) => [...prev, data.id]);
+    },
+    onError: (error) => {
+      console.log(error.message);
     },
   });
 
-  const addToWatchLater = api.item.addToWatchLater.useMutation({
-    onSuccess: (data) => {
-      setInWatchLater(data.inWatchLater ?? false);
-    },
-  });
+  /* Add to handler */
+  const handleAddTo = (listId: string) => {
+    const listTitle =
+      listId === "001"
+        ? "Favorites"
+        : listId === "002"
+          ? "Watch later"
+          : listId === "003"
+            ? "Bookmarks"
+            : "New list";
 
-  const addToBookmarks = api.item.addToBookmarks.useMutation({
-    onSuccess: (data) => {
-      setInBookmarks(data.inBookmarks ?? false);
-    },
-  });
-
-  const handleAddTo = (list: string) => {
-    if (list === "001") {
-      addToFavorites.mutate({
-        tmdbId: itemId,
-        type,
-        inFavorites: !inFavorites,
-      });
-    }
-
-    if (list === "002") {
-      addToWatchLater.mutate({
-        tmdbId: itemId,
-        type,
-        inWatchLater: !inWatchLater,
-      });
-    }
-
-    if (list === "003") {
-      addToBookmarks.mutate({
-        tmdbId: itemId,
-        type,
-        inBookmarks: !inBookmarks,
-      });
-    }
+    addToList.mutate({
+      listId,
+      listTitle,
+      listEditable: false,
+      itemId: item.data?.id ?? "",
+      tmdbId: itemId,
+      type,
+    });
   };
 
-  /* Change the inList state when item retrieved from database */
   useEffect(() => {
-    if (item.data) {
-      if (item.data.inFavorites) {
-        setInFavorites(true);
-      }
-      if (item.data.inWatchLater) {
-        setInWatchLater(true);
-      }
-      if (item.data.inBookmarks) {
-        setInBookmarks(true);
-      }
+    if (item.data?.lists) {
+      item.data.lists.map((list) => {
+        setOnLists((prev) => [...prev, list.id]);
+      });
     }
   }, [item.data]);
 
@@ -121,13 +95,7 @@ export default function AddToButtonsClient({
         <DropdownItem
           key="001"
           startContent={
-            addToFavorites.isLoading ? (
-              <Spinner size="sm" color="white" />
-            ) : inFavorites ? (
-              <IconHeartFilled />
-            ) : (
-              <IconHeart />
-            )
+            onLists.includes("001") ? <IconHeartFilled /> : <IconHeart />
           }
           classNames={{ base: "hover:bg-red-900" }}
         >
@@ -137,13 +105,7 @@ export default function AddToButtonsClient({
         <DropdownItem
           key="002"
           startContent={
-            addToWatchLater.isLoading ? (
-              <Spinner size="sm" color="white" />
-            ) : inWatchLater ? (
-              <IconClockFilled />
-            ) : (
-              <IconClock />
-            )
+            onLists.includes("002") ? <IconClockFilled /> : <IconClock />
           }
         >
           Add to Watch Later
@@ -152,13 +114,7 @@ export default function AddToButtonsClient({
         <DropdownItem
           key="003"
           startContent={
-            addToBookmarks.isLoading ? (
-              <Spinner size="sm" color="white" />
-            ) : inBookmarks ? (
-              <IconBookmarkFilled />
-            ) : (
-              <IconBookmark />
-            )
+            onLists.includes("003") ? <IconBookmarkFilled /> : <IconBookmark />
           }
         >
           Add to Bookmarks

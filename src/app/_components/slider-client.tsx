@@ -1,23 +1,26 @@
-"use client";
-
 /* React imports */
 import { useRef, useState } from "react";
 
-/* Components imports */
-import CardClient from "~/app/_components/card-client";
-
 /* NextUI imports */
 import { Button } from "@nextui-org/react";
+
+/* Components imports */
+import CardClient from "~/app/_components/card-client";
 
 /* Icons imports */
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 /* Types imports */
-import { type Movie, type TVShow } from "types";
+import { type DiscoverMovieResult, type DiscoverTVShowResult } from "types";
 
-export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
+export default function SliderClient({
+  data,
+}: {
+  data: DiscoverMovieResult[] | DiscoverTVShowResult[];
+}) {
   /* State to show controls */
-  const [showControls, setShowControls] = useState(false);
+  const [showLeftControl, setShowLeftControl] = useState(false);
+  const [showRightControl, setShowRightControl] = useState(false);
 
   /* Reference to slider element */
   const sliderRef = useRef<HTMLDivElement>(null);
@@ -40,8 +43,14 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
 
   return (
     <div
-      onMouseEnter={() => setShowControls(true)}
-      onMouseLeave={() => setShowControls(false)}
+      onMouseEnter={() => {
+        setShowLeftControl(true);
+        setShowRightControl(true);
+      }}
+      onMouseLeave={() => {
+        setShowLeftControl(false);
+        setShowRightControl(false);
+      }}
       className="relative flex items-center"
     >
       {/* Previous button */}
@@ -51,8 +60,8 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         radius="full"
         isIconOnly
         className={`absolute left-0 z-20 ${
-          showControls ? "flex" : "hidden"
-        } -translate-x-1/2 hover:bg-secondary`}
+          showLeftControl ? "flex" : "hidden"
+        } -translate-x-1/2 hover:bg-primary-200 hover:opacity-100`}
       >
         <IconChevronLeft />
       </Button>
@@ -60,7 +69,7 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
       {/* Cards container */}
       <div
         ref={sliderRef}
-        className="flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2 scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-600"
+        className="flex gap-x-4 overflow-x-scroll scroll-smooth px-2 pb-4 pt-2 scrollbar-thin scrollbar-track-neutral-900 scrollbar-thumb-neutral-800"
       >
         {data.map((item, index) => (
           <CardClient key={index} data={item} />
@@ -74,8 +83,8 @@ export default function SliderClient({ data }: { data: Movie[] | TVShow[] }) {
         radius="full"
         isIconOnly
         className={`absolute right-0 z-20 ${
-          showControls ? "flex" : "hidden"
-        } translate-x-1/2 hover:bg-secondary`}
+          showRightControl ? "flex" : "hidden"
+        } translate-x-1/2`}
       >
         <IconChevronRight />
       </Button>

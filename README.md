@@ -26,3 +26,14 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+## To Do
+
+- [] DB Model better
+- [] Better tmdb endpoint
+- [] Better Item result in search bar
+- [] Optimize search request in search bar
+- [] Hide slider controls when there is no more to slide
+- [] Providers login and sign up
+- [] Little bug in card image when changin module options in home page
+- [] Wrong color in loading image animation

@@ -8,15 +8,26 @@ datasource db {
     relationMode = "prisma"
 }
 
+// Data
 model Item {
-    id           String   @id @default(cuid())
-    tmdbId       String
-    type         String
-    rating       Float    @default(0)
-    watched      Boolean  @default(false)
-    inFavorites  Boolean?
-    inWatchLater Boolean?
-    inBookmarks  Boolean?
+    id      String  @id @default(cuid())
+    tmdbId  String
+    type    String
+    rating  Float   @default(0)
+    watched Boolean @default(false)
+    lists   List[]
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
+    @@index([userId])
+}
+
+model List {
+    id       String  @id
+    title    String
+    editable Boolean
+    items    Item[]
 
     user   User   @relation(fields: [userId], references: [id])
     userId String
@@ -49,8 +60,7 @@ model Session {
     sessionToken String   @unique
     userId       String
     expires      DateTime
-
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@index([userId])
 }
@@ -65,6 +75,7 @@ model User {
     accounts       Account[]
     sessions       Session[]
     items          Item[]
+    lists          List[]
 }
 
 model VerificationToken {

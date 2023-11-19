@@ -1,5 +1,6 @@
 /* Components imports */
-import PlayTrailerButtonClient from "./play-trailer-button-client";
+import { filterVideos } from "~/utils/filterVideos";
+import PlayTrailerButtonClient from "~/app/_components/play-trailer-button-client";
 
 /* API imports */
 import { api } from "~/trpc/server";
@@ -9,7 +10,13 @@ export default async function PlayTrailerButtonServer({
 }: {
   itemId: number;
 }) {
-  const trailer = await api.tmdb.getTrailer.query({ type: "movie", itemId });
+  /* Gets related videos of the item */
+  const videos = await api.tmdb.videos.query({ type: "movie", itemId });
+
+  /* Filter videos and get only trailers in youtube */
+  const trailerVideos = filterVideos(videos.results, "YouTube", "Trailer");
+
+  const trailer = trailerVideos[0];
 
   const trailerLink = `https://www.youtube.com/embed/${trailer?.key}`;
 

@@ -1,8 +1,11 @@
-import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
+/* Superjson imports */
 import superjson from "superjson";
 
+/* Types imports */
 import { type AppRouter } from "~/server/api/root";
+import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 
+/* Superjson declaration */
 export const transformer = superjson;
 
 function getBaseUrl() {
@@ -15,16 +18,6 @@ export function getUrl() {
   return getBaseUrl() + "/api/trpc";
 }
 
-/**
- * Inference helper for inputs.
- *
- * @example type HelloInput = RouterInputs['example']['hello']
- */
 export type RouterInputs = inferRouterInputs<AppRouter>;
 
-/**
- * Inference helper for outputs.
- *
- * @example type HelloOutput = RouterOutputs['example']['hello']
- */
 export type RouterOutputs = inferRouterOutputs<AppRouter>;
